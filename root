@@ -1,0 +1,1205 @@
+#!/bin/bash
+# Word List Manipulator (wlm)
+# Version 0.2 last edit 12-10-2011 
+# Credits to ; 
+# Pureh@te as used and learned a lot from his wordlist_tool script.
+# unix.com radoulov for the script on combining words.
+# Google ;) 
+#
+#
+#FIXED SETTINGS
+RED=$(tput setaf 1 && tput bold)
+GREEN=$(tput setaf 2 && tput bold)
+STAND=$(tput sgr0)
+BLUE=$(tput setaf 6 && tput bold)
+
+################
+# CASE OPTIONS #
+################
+function f_case {
+clear
+echo "Wordlist Manipulator" 
+echo "Case options"
+echo "--------------------" 
+echo "1 Change case of first letter
+2 Change case of last letter 
+3 Change all lower case to upper case
+4 Change all upper case to lower case
+Q Back to menu"
+echo -ne $STAND"Enter choice from above menu: "$GREEN
+read case_menu
+if [ "$case_menu" == "q" ] || [ "$case_menu" == "Q" ] ; then 
+f_menu
+elif [[ "$case_menu" != [1-4] ]]; then
+echo $RED"must be an entry from the above menu $STAND" 
+sleep 1
+f_case
+fi 
+# Input file to alter
+echo -ne $STAND"Enter /path/to/wordlist you want to edit: "$GREEN 
+read case_infile
+while [ ! -f $case_infile ] || [ "$case_infile" == "" ] ; do 
+echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+read case_infile
+done
+# Output file to save the editted wordlist to
+echo -ne $STAND"Enter desired output file name: "$GREEN 
+read case_outfile
+while [ "$case_outfile" == "" ] ; do 
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read case_outfile
+done
+if [ -f $case_outfile ] ; then
+echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$case_outfile$RED will be overwritten$STAND"
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+#OPTION 1 changing first letter to lower or upper case
+if [ $case_menu = "1" ] ; then 
+    echo -ne "Change all first letters to upper case or lower case ? U / L "$GREEN 
+    read first_letter
+    if [ "$first_letter" == "l" ] || [ "$first_letter" == "L" ] ; then
+    sed 's/^./\l&/' $case_infile > $case_outfile
+    elif [ "$first_letter" == "u" ] || [ "$first_letter" == "U" ] ; then
+    sed 's/^./\u&/' $case_infile > $case_outfile
+    fi
+    echo "$GREEN$case_outfile$STAND created ;"
+    head -n 3 $case_outfile
+    echo ".."
+    tail -n 3 $case_outfile
+    echo ""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+#OPTION 2 changing last letter to lower or upper case
+elif [ $case_menu = "2" ] ; then 
+    echo -ne "Change all last letters to upper case or lower case ? U / L "$GREEN 
+    read last_letter
+    if [ "$last_letter" == "l" ] || [ "$last_letter" == "L" ] ; then
+    sed 's/.$/\l&/' $case_infile > $case_outfile
+    elif [ "$last_letter" == "u" ] || [ "$last_letter" == "U" ] ; then
+    sed 's/.$/\u&/' $case_infile > $case_outfile
+    fi
+    echo $GREEN"$case_outfile$STAND created ;"
+    head -n 3 $case_outfile
+    echo ".."
+    tail -n 3 $case_outfile
+    echo $STAND""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+#OPTION 3 change all lower case to upper case
+elif [ $case_menu = "3" ] ; then 
+    tr '[:lower:]' '[:upper:]' < $case_infile > $case_outfile
+    echo "$GREEN$case_outfile$STAND created ;"
+    head -n 3 $case_outfile
+    echo ".."
+    tail -n 3 $case_outfile
+    echo $STAND""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+#OPTION 4 change all upper case to lower case
+elif [ $case_menu = "4" ] ; then 
+    tr '[:upper:]' '[:lower:]' < $case_infile > $case_outfile
+    echo "$GREEN$case_outfile$STAND created ;"
+    head -n 3 $case_outfile
+    echo ".."
+    tail -n 3 $case_outfile
+   echo $STAND""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+fi
+}
+
+#######################
+# COMBINATION OPTIONS #
+#######################
+f_combine () {
+clear
+echo "Wordlist Manipulator" 
+echo "Combination options"
+echo "--------------------" 
+echo "1 Combine words from 1 list to each word in another list
+2 Combine all wordlists in a directory to 1 wordlist
+Q Return to menu"
+echo -ne $STAND"Enter choice from above menu: "$GREEN
+read comb_menu
+if [ "$comb_menu" == "q" ] || [ "$comb_menu" == "Q" ] ; then 
+f_menu
+elif [[ "$comb_menu" != [1-3] ]]; then
+echo $RED"must be an entry from the above menu $STAND" 
+sleep 1
+f_combine
+fi 
+# OPTION 1 COMBINE WORDS FROM 1 LIST TO EACH WORD IN ANOTHER LIST
+if [ "$comb_menu" == "1" ] ; then
+  clear
+  echo $BLUE"Teh C0mb1n4t0r :D"$STAND
+  echo $STAND"Combine words from one wordlist to all words in another wordlist"
+  echo $STAND""
+  echo -ne $STAND"Enter /path/to/wordlist to which you want words appended: "$GREEN 
+  read comb_infile1
+
+  while [ ! -f $comb_infile1 ] ; do 
+  echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+  read comb_infile1
+  done
+  echo -ne $STAND"Enter /path/to/wordlist to append to $BLUE$comb_infile1$STAND: "$GREEN 
+  read comb_infile2
+
+  while [ ! -f $comb_infile2 ] ; do 
+  echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+  read comb_infile2
+  done
+
+  echo -ne $STAND"Enter desired output file name: "$GREEN 
+  read comb_outfile
+  if [ -f $comb_outfile ] ; then
+  echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+  read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$comb_outfile$RED will be overwritten"
+	echo $STAND"Working .."
+	sleep 1
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	f_menu
+	fi
+  fi
+echo $STAND ""
+awk > $comb_outfile 'NR == FNR {
+  l2[FNR] = $0
+  fnr = FNR; next
+  }
+{
+  for (i = 0; ++i <= fnr;)
+    print $0 l2[i]
+  }' $comb_infile2 $comb_infile1
+
+echo $GREEN"$comb_outfile$STAND has been created ;"
+head -n 3 $comb_outfile 
+echo "."
+echo "."
+tail -n 3 $comb_outfile 
+    echo $STAND""
+    echo -ne $STAND"Hit Enter to return to menu"$STAND
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+
+
+# OPTION 2 COMBINE ALL WORDLISTS IN A DIRECTORY
+elif [ "$comb_menu" == "2" ] ; then 
+    echo -ne $STAND"Enter directory where the wordlists are stored \n(ie. /root/wordlists) : "$GREEN
+    read directory
+    while [ ! -d "$directory" ] || [ "$directory" == "" ] ; do 
+    echo $RED"Directory does not exist or cannot be found"$STAND 
+    echo -ne $STAND"Enter existing directory: " 
+    read directory
+    done
+    echo -ne $STAND"Enter desired output file name: "$GREEN
+    read dir_outfile
+    if [ -f $dir_outfile ] ; then
+    echo -ne $RED"File already exists, add data to existing file ? y/n "$GREEN
+    read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $STAND"Working.."
+	sleep 1
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+    fi
+    echo $STAND""
+    cat $directory/* >> "$dir_outfile"
+    echo "$GREEN$dir_outfile$STAND has been created; "
+    head -n 3 $dir_outfile
+    echo ".." 
+    tail -n 3 $dir_outfile
+    echo $STAND""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+fi
+}
+
+##################################
+# PREPENDING / PREFIXING OPTIONS #
+##################################
+
+f_prefix () {
+clear
+echo "Wordlist Manipulator" 
+echo "Prefix options"
+echo "--------------------" 
+echo "1 Prefix numeric values in sequence to a wordlist (ie. 0 - 99999)
+2 Prefix fixed number of numeric values to a wordlist (ie. 00000 - 99999)
+3 Prefix word / characters to a wordlist
+Q Back to menu"
+echo -ne $STAND"Enter choice from above menu: "$GREEN
+read pref_menu
+if [ "$pref_menu" == "q" ] || [ "$pref_menu" == "Q" ] ; then 
+f_menu
+elif [[ "$pref_menu" != [1-3] ]]; then
+echo $RED"must be an entry from the above menu $STAND" 
+sleep 1
+f_prefix
+fi 
+
+# Option 1 - Prefix numbers in sequence to a list
+if [ "$pref_menu" == "1" ] ; then 
+echo -ne $STAND"Enter /path/to/wordlist to prefix numbers : "$GREEN 
+read pref_nums
+	while [ ! -f "$pref_nums" ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read pref_nums
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read pref_nums_out
+if [ -f "$pref_nums_out" ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$pref_nums_out$RED will be overwritten"$STAND
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+echo -ne $STAND"Enter how many numeric values you want to Prefix (max 5): "$GREEN
+read numbs
+echo $STAND"Working .."
+ 	if [ "$numbs" == 1 ] ; then 
+ 	for i in $(cat $pref_nums); do seq -f "%01.0f$i" 0 9; done > "$pref_nums_out"
+ 	elif [ "$numbs" == 2 ] ; then 
+ 	for i in $(cat $pref_nums); do seq -f "%01.0f$i" 0 99; done > "$pref_nums_out"
+ 	elif [ "$numbs" == 3 ] ; then 
+ 	for i in $(cat $pref_nums); do seq -f "%01.0f$i" 0 999; done > "$pref_nums_out"
+ 	elif [ "$numbs" == 4 ] ; then 
+ 	for i in $(cat $pref_nums); do seq -f "%01.0f$i" 0 9999; done > "$pref_nums_out"
+ 	elif [ "$numbs" == 5 ] ; then 
+ 	for i in $(cat $pref_nums); do seq -f "%01.0f$i" 0 99999; done > "$pref_nums_out"
+	fi
+echo "$GREEN$pref_nums_out$STAND has been created; "
+head -n 3 $pref_nums_out
+echo ".." 
+tail -n 3 $pref_nums_out
+echo $STAND""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+
+
+# Option 2 - Prefix fixed number of numberic values to a list
+elif [ "$pref_menu" == "2" ] ; then 
+echo -ne $STAND"Enter /path/to/wordlist to prefix numbers : "$GREEN 
+read pref_numf
+	while [ ! -f $pref_numf ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read $pref_numf
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read pref_numf_out
+if [ -f $pref_numf_out ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$pref_numf_out$RED will be overwritten"$STAND
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+echo -ne $STAND"Enter how many numeric values you want to Prefix (max 5): "$GREEN
+read numbf
+echo $STAND"Working .."
+ 	if [ "$numbf" == 1 ] ; then 
+ 	for i in $(cat $pref_numf); do seq -f "%0$numbf.0f$i" 0 9; done > "$pref_numf_out"
+ 	elif [ "$numbf" == 2 ] ; then 
+ 	for i in $(cat $pref_numf); do seq -f "%0$numbf.0f$i" 0 99; done > "$pref_numf_out"
+ 	elif [ "$numbf" == 3 ] ; then 
+ 	for i in $(cat $pref_numf); do seq -f "%0$numbf.0f$i" 0 999; done > "$pref_numf_out"
+ 	elif [ "$numbf" == 4 ] ; then 
+ 	for i in $(cat $pref_numf); do seq -f "%0$numbf.0f$i" 0 9999; done > "$pref_numf_out"
+ 	elif [ "$numbf" == 5 ] ; then 
+ 	for i in $(cat $pref_numf); do seq -f "%0$numbf.0f$i" 0 99999; done > "$pref_numf_out"
+	fi
+echo "$GREEN$pref_numf_out$STAND has been created; "
+head -n 3 $pref_numf_out
+echo ".." 
+tail -n 3 $pref_numf_out
+echo $STAND""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+
+# Option 3 - Prefix word / characters to a list
+elif [ "$pref_menu" == "3" ] ; then 
+echo -ne $STAND"Enter /path/to/wordlist to prefix words/characters : "$GREEN 
+read pref_char_infile
+	while [ ! -f $pref_char_infile ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read pref_char_infile
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read pref_char_outfile
+	if [ -f $pref_char_outfile ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$pref_char_outfile$RED will be overwritten"
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+	fi
+echo -ne $STAND"Enter words/characters you want prefixed: "$GREEN
+read pref_char
+echo "Working .." 
+sleep 1 
+sed "s/^./"$pref_char"&/" "$pref_char_infile" > "$pref_char_outfile" 
+echo $STAND""
+echo "$GREEN$pref_char_outfile$STAND has been created; "
+head -n 3 $pref_char_outfile
+echo ".." 
+tail -n 3 $pref_char_outfile
+echo $STAND""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+fi
+}
+
+
+
+#################################
+# APPENDING / SUFFIXING OPTIONS #
+#################################
+
+f_suffix () {
+clear
+echo "Wordlist Manipulator" 
+echo "Suffix options"
+echo "--------------------" 
+echo "1 Suffix numeric values in sequence to a wordlist (ie. 0 - 99999)
+2 Suffix fixed number of numeric values to a wordlist (ie. 00000 - 99999)
+3 Suffix word / characters to a wordlist
+Q Back to menu"
+echo -ne $STAND"Enter choice from above menu: "$GREEN
+read suf_menu
+if [ "$suf_menu" == "q" ] || [ "$suf_menu" == "Q" ] ; then 
+f_menu
+elif [[ "$suf_menu" != [1-3] ]]; then
+echo $RED"must be an entry from the above menu $STAND" 
+sleep 1
+f_suffix
+fi 
+
+# Option 1 - Suffix numbers in sequence to a list
+if [ "$suf_menu" == "1" ] ; then 
+echo -ne $STAND"Enter /path/to/wordlist to suffix numbers to: "$GREEN 
+read suf_nums
+	while [ ! -f $suf_nums ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read suf_nums
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read suf_nums_out
+if [ -f $suf_nums_out ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$suf_nums_out$RED will be overwritten"$STAND
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+echo -ne $STAND"Enter how many numeric values you want to suffix (max 5): "$GREEN
+read numbs
+echo $STAND"Working .."
+ 	if [ "$numbs" == 1 ] ; then 
+ 	for i in $(cat $suf_nums); do seq -f "%01.0f$i" 0 9; done > "$suf_nums_out"
+ 	elif [ "$numbs" == 2 ] ; then 
+ 	for i in $(cat $suf_nums); do seq -f "%01.0f$i" 0 99; done > "$suf_nums_out"
+ 	elif [ "$numbs" == 3 ] ; then 
+ 	for i in $(cat $suf_nums); do seq -f "%01.0f$i" 0 999; done > "$suf_nums_out"
+ 	elif [ "$numbs" == 4 ] ; then 
+ 	for i in $(cat $suf_nums); do seq -f "%01.0f$i" 0 9999; done > "$suf_nums_out"
+ 	elif [ "$numbs" == 5 ] ; then 
+ 	for i in $(cat $suf_nums); do seq -f "%01.0f$i" 0 99999; done > "$suf_nums_out"
+	fi
+echo "$GREEN$suf_nums_out$STAND has been created; "
+head -n 3 $suf_nums_out
+echo ".." 
+tail -n 3 $suf_nums_out
+echo $STAND""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+
+
+# Option 2 - Suffix fixed number of numberic values to a list
+elif [ "$suf_menu" == "2" ] ; then 
+echo -ne $STAND"Enter /path/to/wordlist to suffix numbers to: "$GREEN 
+read suf_numf
+	while [ ! -f $suf_numf ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read suf_numf
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read suf_numf_out
+if [ -f $suf_numf_out ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$suf_numf_out$RED will be overwritten"$STAND
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+echo -ne $STAND"Enter how many numeric values you want to Suffix (max 5): "$GREEN
+read numbf
+echo $STAND"Working .."
+ 	if [ "$numbf" == 1 ] ; then 
+ 	for i in $(cat $suf_numf); do seq -f "%0$numbf.0f$i" 0 9; done > "$suf_numf_out"
+ 	elif [ "$numbf" == 2 ] ; then 
+ 	for i in $(cat $suf_numf); do seq -f "%0$numbf.0f$i" 0 99; done > "$suf_numf_out"
+ 	elif [ "$numbf" == 3 ] ; then 
+ 	for i in $(cat $suf_numf); do seq -f "%0$numbf.0f$i" 0 999; done > "$suf_numf_out"
+ 	elif [ "$numbf" == 4 ] ; then 
+ 	for i in $(cat $suf_numf); do seq -f "%0$numbf.0f$i" 0 9999; done > "$suf_numf_out"
+ 	elif [ "$numbf" == 5 ] ; then 
+ 	for i in $(cat $suf_numf); do seq -f "%0$numbf.0f$i" 0 99999; done > "$suf_numf_out"
+	fi
+echo "$GREEN$suf_numf_out$STAND has been created; "
+head -n 3 $suf_numf_out
+echo ".." 
+tail -n 3 $suf_numf_out
+echo $STAND""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+
+# Option 3 - Suffix word / characters to a list
+elif [ "$suf_menu" == "3" ] ; then 
+echo -ne $STAND"Enter /path/to/wordlist to suffix word/characters to: "$GREEN 
+read suf_char_infile
+	while [ ! -f $suf_char_infile ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read suf_char_infile
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read suf_char_outfile
+	if [ -f $suf_char_outfile ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$suf_char_outfile$RED will be overwritten"
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+	fi
+echo -ne $STAND"Enter word/characters you want suffixed: "$GREEN
+read suf_char
+echo "Working .." 
+sleep 1 
+sed "s/.$/&"$suf_char"/" "$suf_char_infile" > "$suf_char_outfile" 
+echo $STAND""
+echo "$GREEN$suf_char_outfile$STAND has been created; "
+head -n 3 $suf_char_outfile
+echo ".." 
+tail -n 3 $suf_char_outfile
+echo $STAND""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+fi
+}
+
+
+##############################
+# INCLUDING CHARACTERS /WORD #
+##############################
+
+f_inclu () {
+clear
+echo "Wordlist Manipulator" 
+echo "Inclusion options"
+echo "--------------------" 
+echo "1 Include characters/word as from a certain position from START of word
+2 Include characters as from a certain position from END of word.
+Q Back to menu"
+echo -ne $STAND"Enter choice from above menu: "$GREEN
+read incl_menu
+if [ "$incl_menu" == "q" ] || [ "$incl_menu" == "Q" ] ; then 
+f_menu
+elif [[ "$incl_menu" != [1-2] ]]; then
+echo $RED"must be an entry from the above menu $STAND" 
+sleep 1
+f_inclu
+fi 
+
+# OPTION 1 INCLUDING CHARACTERS FROM START OF WORD
+if [ "$incl_menu" == "1" ] ; then 
+
+echo -ne $STAND"Enter /path/to/wordlist to include characters/word in: "$GREEN 
+read inclu_infile
+	while [ ! -f $inclu_infile ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read inclu_infile
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read inclu_outfile
+if [ -f $inclu_outfile ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$inclu_outfile$RED will be overwritten"$STAND
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+echo -ne $STAND"Enter the word/characters you want included in each word: "$GREEN
+read inclu_char
+echo -ne $STAND"Enter from what position (after how many characters)
+the word/characters should be included: "$GREEN
+read inclus_pos
+echo "Working .." 
+sleep 1
+sed "s/^.\{$inclus_pos\}/&$inclu_char/" "$inclu_infile" > "$inclu_outfile" 
+echo $STAND""
+echo "$GREEN$inclu_outfile$STAND has been created; "
+head -n 3 $inclu_outfile
+echo ".." 
+tail -n 3 $inclu_outfile
+echo ""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+
+elif [ "$incl_menu" == "2" ] ; then 
+
+echo -ne $STAND"Enter /path/to/wordlist to include characters/word in: "$GREEN 
+read inclu_infile
+	while [ ! -f $inclu_infile ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read inclu_infile
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read inclu_outfile
+if [ -f $inclu_outfile ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$inclu_outfile$RED will be overwritten"$STAND
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+echo -ne $STAND"Enter the word/characters you want included in each word: "$GREEN
+read inclu_char
+echo -ne $STAND"Enter before what position (before how many characters before end of word)
+the word/characters should be included: "$GREEN
+read inclus_pos
+echo "Working .." 
+sleep 1
+sed "s/.\{$inclus_pos\}$/$inclu_char&/" "$inclu_infile" > "$inclu_outfile" 
+echo $STAND""
+echo "$GREEN$inclu_outfile$STAND has been created; "
+head -n 3 $inclu_outfile
+echo ".." 
+tail -n 3 $inclu_outfile
+echo ""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+fi 
+}
+
+
+
+######################
+# SUBSTITION OPTIONS #
+######################
+f_subs () {
+clear
+echo "Wordlist Manipulator" 
+echo "Substitution options"
+echo "--------------------" 
+echo "1 Substitute/Replace characters from START of word.
+2 Substitute/Replace characters from END of word.
+3 Substitute/Replace characters at a certain position.
+Q Back to menu"
+echo -ne $STAND"Enter choice from above menu: "$GREEN
+read subs_menu
+if [ "$subs_menu" == "q" ] || [ "$subs_menu" == "Q" ] ; then 
+f_menu
+elif [[ "$subs_menu" != [1-3] ]]; then
+echo $RED"must be an entry from the above menu $STAND" 
+sleep 1
+f_subs
+fi 
+
+# OPTION 1 SUBSTITUTE CHARACTERS FROM START OF WORD
+if [ "$subs_menu" == "1" ] ; then 
+
+echo -ne $STAND"Enter /path/to/wordlist in which to substitute characters: "$GREEN 
+read subs_infile
+	while [ ! -f $subs_infile ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read subs_infile
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read subs_outfile
+if [ -f $subs_outfile ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$subs_outfile$RED will be overwritten"$STAND
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+echo -ne $STAND"Enter the word/characters you want to replace substituted characters with: "$GREEN
+read subs_char
+echo -ne $STAND"Enter from the number of characters from start of word to replace"$GREEN
+read subs_num
+echo "Working .." 
+sleep 1
+sed "s/^.\{$subs_num\}/$subs_char/" "$subs_infile" > "$subs_outfile" 
+echo $STAND""
+echo "$GREEN$subs_outfile$STAND has been created; "
+head -n 3 $subs_outfile
+echo ".." 
+tail -n 3 $subs_outfile
+echo ""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+
+# OPTION 2 SUBSTITUTE CHARACTERS FROM END OF WORD
+elif [ "$subs_menu" == "2" ] ; then 
+
+echo -ne $STAND"Enter /path/to/wordlist to include characters/word in: "$GREEN 
+read subs_infile
+	while [ ! -f $subs_infile ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read subs_infile
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read subs_outfile
+if [ -f $subs_outfile ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$subs_outfile$RED will be overwritten"$STAND
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+echo -ne $STAND"Enter the word/characters you want to replace the sustituted characters with: "$GREEN
+read subs_char
+echo -ne $STAND"Enter the number of characters at the end of word you want to replace: "$GREEN
+read subs_num
+echo "Working .." 
+sleep 1
+sed "s/.\{$subs_num\}$/$subs_char/" "$subs_infile" > "$subs_outfile" 
+echo $STAND""
+echo "$GREEN$subs_outfile$STAND has been created; "
+head -n 3 $subs_outfile
+echo ".." 
+tail -n 3 $subs_outfile
+echo ""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+
+# OPTION 3 SUBSTITUTE/REPLACE CHARACTERS IN A CERTAIN POSITION
+
+elif [ "$subs_menu" == "3" ] ; then 
+
+echo -ne $STAND"Enter /path/to/wordlist in which to substitute characters: "$GREEN 
+read subs_infile
+	while [ ! -f $subs_infile ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read subs_infile
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read subs_outfile
+if [ -f $subs_outfile ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$subs_outfile$RED will be overwritten"$STAND
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+echo -ne $STAND"Enter the word/characters you want to replace the sustituted characters with: "$GREEN
+read subs_char
+echo -ne $STAND"Enter the start position of characters you want to replace (ie. 2);
+(position 1 will start from 2nd character, position 4 will start from 5th character, etc) "$GREEN
+read subs_poss
+echo -ne $STAND"Enter how many characters after start position you want to replace (ie.2); "
+read subs_pose
+echo "Working .." 
+sleep 1
+sed -r "s/^(.{$subs_poss})(.{$subs_pose})/\1$subs_char/" "$subs_infile" > "$subs_outfile" 
+echo $STAND""
+echo "$GREEN$subs_outfile$STAND has been created; "
+head -n 3 $subs_outfile
+echo ".." 
+tail -n 3 $subs_outfile
+echo ""
+    echo -ne $STAND"Hit Enter to return to menu" 
+    read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+
+
+
+
+
+
+
+fi
+}
+
+# Information on File
+f_info () {
+echo "Wordlist manipulator"
+echo "File information"
+echo "--------------------"
+echo -ne "Enter /path/to/wordlist to analyze: "$GREEN
+read info
+	while [ ! -f $info ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read info
+	done
+echo $STAND""
+echo "File type"
+echo "---------"$BLUE
+file $info
+echo $STAND""
+echo $STAND"File size"
+echo $STAND"---------"$BLUE
+du -h $info
+echo $STAND""
+echo "Example of file entries"
+echo "-----------------------"$BLUE
+head -n 3 $info
+echo ".."
+tail -n 3 $info
+echo $STAND""
+echo $STAND"Wordcount/number of lines"
+echo $STAND"-------------------------"$BLUE
+wc -l $info
+echo ""
+echo $STAND"Maximum word/line length"
+echo $STAND"------------------------"$BLUE
+#awk ' { if ( length > L ) { L=length} }END{ print L}' $info
+wc -L $info
+echo $STAND""
+echo -ne $STAND"hit Enter to return to menu or q to quit "$GREEN
+read return
+	if [ "$return" == "" ] ; then 
+		echo $STAND"" 
+	elif [ "$return" == "q" ] || [ "$return" == "Q" ]; then 
+		echo $STAND""
+		exit
+	fi
+}
+
+
+f_tidy () {
+clear
+echo "Wordlist Manipulator" 
+echo "Optimization options"
+echo "--------------------" 
+echo "1 Full optimization of wordlist (thanks to Pureh@te's wordlist_tools.sh).
+2 Optimize wordlist for WPA.
+3 
+Q Back to menu"
+echo -ne $STAND"Enter choice from above menu: "$GREEN
+read tidy_menu
+if [ "$tidy_menu" == "q" ] || [ "$tidy_menu" == "Q" ] ; then 
+f_menu
+elif [[ "$tidy_menu" != [1-3] ]]; then
+echo $RED"must be an entry from the above menu $STAND" 
+sleep 1
+f_tidy
+fi 
+
+# OPTION 1 FULL OPTIMIZATION OF WORDLIST
+if [ "$tidy_menu" == "1" ] ; then 
+
+echo -ne $STAND"Enter /path/to/wordlist optimize for WPA: "$GREEN 
+read tidy_infile
+	while [ ! -f $tidy_infile ] || [ "$tidy_infile" == "" ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read tidy_infile
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read tidy_outfile
+if [ -f $tidy_outfile ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$tidy_outfile$RED will be overwritten"$STAND
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+##full optimize##
+echo -en $STAND"Enter a minimum password length: "$GREEN
+read min
+echo -en $STAND"Enter a maximum password length: "$GREEN
+read max
+echo -en $STAND"Hit return to proccess the file: "$STAND
+read return
+if [ "$return" == "" ]; then
+echo
+echo "Removing duplicates from the file..."
+cat $tidy_infile | uniq > working.txt
+echo "Sorting the list..."
+cat working.txt | sort > working2.txt
+echo "Deleting passwords which do not meet length requirment..."
+pw-inspector -i working2.txt -o working3.txt -m $min -M $max
+echo "Removing all non ascii chars if they exist..."
+/usr/bin/tr -cd '\11\12\40-\176' < working3.txt > working4.txt
+echo "Removing all comments..."
+/bin/sed '1p; /^[[:blank:]]*#/d; s/[[:blank:]][[:blank:]]*#.*//' working4.txt > working5.txt
+echo "Removing any leading white spaces and tabs from the file..."
+sed -e 's/^[ \t]*//' working5.txt > working6.txt
+echo
+echo "One more pass to sort and weed out the duplicates..."
+cat working6.txt | sort | uniq > working7.txt
+mv working7.txt $tidy_outfile
+echo "Cleaning up the mess..."
+rm -rf working*.txt
+fi
+cat $tidy_outfile | while read line
+do
+        count=$[ $count + 1 ]
+done
+echo $STAND""
+echo "$GREEN$tidy_outfile$STAND has been created; "
+head -n 3 $tidy_outfile
+echo ".."
+tail -n 3 $tidy_outfile
+echo ""
+echo -ne "hit Enter to return to menu "
+read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+# OPTION 2 OPTIMIZATION OF WORDLIST FOR WPA
+elif [ "$tidy_menu" == "2" ] ; then 
+
+echo -ne $STAND"Enter /path/to/wordlist optimize for WPA: "$GREEN 
+read tidy_infile
+	while [ ! -f $tidy_infile ] ; do 
+	echo -ne $RED"File does not exist, enter /path/to/file: "$GREEN
+	read tidy_infile
+	done
+#Enter output file to write the changes to
+echo -ne $STAND"Enter desired output file name: "$GREEN
+read tidy_outfile
+if [ -f $tidy_outfile ] ; then
+	echo -ne $RED"File already exists, overwrite ? y/n "$GREEN
+	read over
+	if [ "$over" == "y" ] || [ "$over" == "Y" ] ; then
+	echo $RED"Existing file $GREEN$tidy_outfile$RED will be overwritten"$STAND
+	else
+	echo $STAND"Process cancelled, returning to menu"
+	sleep 1
+	f_menu
+	fi
+fi
+echo "Working .." 
+pw-inspector -i $tidy_infile -o /root/temp_outfile -m 8 -M 63
+cat /root/temp_outfile | sort | uniq > $tidy_outfile
+rm -rf /root/temp_outfile
+echo $STAND""
+echo "$GREEN$tidy_outfile$STAND has been created; "
+head -n 3 $tidy_outfile
+echo ".."
+tail -n 3 $tidy_outfile
+echo ""
+echo -ne "hit Enter to return to menu "
+read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+fi
+}
+
+
+f_wlsize () {
+clear
+echo "Wordlist manipulator"
+echo "Check what size a newly created wordlist would be"
+echo "when creating a wordlist with for instance 'crunch'."
+echo ""
+echo $STAND"Choose the number of characters that will be used making the wordlist"
+echo $STAND"====================================================================="
+echo "Example ;"
+echo $RED"10 $STAND = Numeric only"
+echo $RED"16 $STAND = Hexadecimal"
+echo $RED"26 $STAND = Alpha only"
+echo $RED"33 $STAND = Special characters including space"
+echo $RED"36 $STAND = Alpha + Numeric"
+echo $RED"52 $STAND = Lowercase+Uppercase alpha"
+echo $RED"62 $STAND = Lower+Uppercase alpha + Numeric"
+echo $RED"95 $STAND = Lower+Uppercase alpha +Numeric+SpecialCharacters including space"
+echo
+echo -ne "Enter number of characters to be used: "$RED
+read X
+echo -ne $STAND"Enter length of words/passphrases: "$RED
+read Y
+(tput sgr 0)
+# Calculations based on binary sizes ;
+# For comma seperated values for groups of 3 digits pipe the below calculation out through sed ;
+# sed -r ':L;s=\b([0-9]+)([0-9]{3})\b=\1,\2=g;t L'
+B=$( echo "scale=3;($X^$Y)*($Y+1)" | bc )
+KB=$( echo "scale=3;($X^$Y)*($Y+1) / 1024" | bc )
+MB=$( echo "scale=3;(($X^$Y)*($Y+1)/1024)/1024" | bc )
+GB=$( echo "scale=3;((($X^$Y)*($Y+1)/1024)/1024)/1024" | bc )
+TB=$( echo "scale=3;(((($X^$Y)*($Y+1)/1024)/1024)/1024)/1024" | bc )
+PB=$( echo "scale=3;((((($X^$Y)*($Y+1)/1024)/1024)/1024)/1024)/1024" | bc )
+#
+# Calculation for number of results ;
+# For comma seperated values for groups of 3 digits pipe the below calculation out through sed ;
+# sed -r ':L;s=\b([0-9]+)([0-9]{3})\b=\1,\2=g;t L'
+NMBR=$( echo "($X^$Y)" | bc )
+echo
+#
+# Outcome of calculations ;
+echo $stand"Number of words/passphrases in wordlist: $green$NMBR"
+(tput sgr 0)
+echo
+echo $$STAND"Estimated wordlist size ; "
+echo $GREEN"B  $STAND(Bytes)     = $STAND$B"
+echo $GREEN"KB $STAND(Kilobytes) = $STAND$KB"
+echo $GREEN"MB $STAND(Megabytes) = $STAND$MB"
+echo $GREEN"GB $STAND(Gigabytes) = $STAND$GB"
+echo $GREEN"TB $STAND(Terabytes) = $STAND$TB"
+echo $GREEN"PB $STAND(Petabytes) = $STAND$PB"
+(tput sgr 0)
+echo
+echo -ne "hit Enter to return to menu "
+read return
+    if [ "$return" == "" ] ; then 
+    echo $STAND""
+    fi
+}
+f_help () {
+clear
+echo $BLUE"
+__    __ _     __  __ 
+\ \/\/ /| |__ |  \/  |
+ \_/\_/ |____||_|\/|_|$STAND
+       by TAPE"
+sleep 1
+echo ""
+echo $BLUE"Wordlist Manipulator v0.2"$STAND
+sleep 3
+echo "q/Q to quit; 
+Introduction
+============
+Why did I spend hours doing this ? 
+Well, I just suck at remembering code for the simple things..
+
+I would normally use crunch to create any wordlist I would like, 
+however it does still, on occasion, come up that we need to alter
+what is already available.
+
+WLM provides an easy menu interface listing the most frequently used
+manipulation options.
+
+
+So in short;
+
+RUNNING SCRIPT
+--------------
+> If program is not running; 
+  chmod 755 wml
+
+
+
+ALL OPTIONS 
+-----------
+1. Case Options;
+	1.1	Change case of first letter of each word in the wordlist.
+	1.2	Change case of last letter of each word in the wordlist.
+	1.3	Change all lower case to upper case.
+	1.4	Change all upper case to lower case.
+
+
+2. Combination options;
+	2.1	Combine words from 1 list list to all words in another list.
+	2.2	Combine all wordlists in a directory to 1 big wordlist.
+
+
+3. Prefix characters to wordlist;
+	3.1	Prefix numeric values in sequence (ie. 0-999)
+	3.2	Prefix fixed number of numeric values (ie. 000-999)
+	3.3	Prefix a word or characters to wordlist.
+Some characters will require you to escape them using backslash (\) 
+also space does not work, so this function has some limitations.
+
+
+4. Append / Suffix characters to wordlist;
+	4.1	Suffix numeric values in sequence (ie. 0-999)
+	3.2	Suffix fixed number of numeric values (ie. 000-999)
+	3.3	Suffix a word or characters to wordlist.
+Some characters will require you to escape them using backslash (\) 
+also space does not work, so this function has some limitations.
+
+5. Include characters 
+	5.1	Include characters from a certain postion from start of word.
+	5.2	Include characters from a certain postion from end of word.
+Some characters will require you to escape them using backslash (\) 
+also space does not work, so this function has some limitations.
+
+
+6. Substitute/Replace characters 
+	5.1	Include characters from start of word.
+	5.2	Include characters from end of word.
+	5.3	Substitute/Replace characters at specified positions in list.
+Some characters will require you to escape them using backslash (\) 
+also space does not work, so this function has some limitations.
+
+7. Optimize / tidy up wordlist.
+	7.1	Full optimization of wordlist. (Thanks to Pureh@te's wordlist_tools.sh) 
+	7.2	Optimize for WPA (min 8 chars max 63 chars)
+	7.3	
+
+8. Miscellaneous fun
+	8.1	Check possible wordlist sizes
+	8.2	
+
+f.File information
+	Gives information on aspects of selected file.
+
+h. This info file
+
+q/Q to quit
+" | less
+
+}
+#MENU 
+f_menu () {
+while :
+do
+clear
+echo $STAND"WORDLIST MANIPULATOR" 
+echo "===================="
+cat << !
+1 Case options
+2 Combinations
+3 Prepend / Prefix
+4 Append / Suffix 
+5 Inclusion
+6 Substitution
+7 Tidy up / optimize wordlist
+8
+h help and listing of all manipulation functions
+f file information
+Q Exit
+!
+echo -ne "Choose from the above menu: "
+read menu
+case $menu in
+1) f_case ;;
+2) f_combine ;;
+3) f_prefix ;;
+4) f_suffix ;;
+5) f_inclu ;;
+6) f_subs ;;
+7) f_tidy ;;
+8) f_wlsize ;;
+f) f_info ;;
+h) f_help ;;
+q) exit ;; 
+Q) exit ;;
+*) echo $RED"\"$menu\" is not valid "$STAND; sleep 1 ;;
+esac
+done
+}
+
+f_menu
