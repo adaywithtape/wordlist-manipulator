@@ -1,6 +1,6 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.7 last edit 21-10-2012 11:45
+# Version 0.7 last edit 21-10-2012 11:55
 #
 # Credits to ; 
 # ============
@@ -2236,19 +2236,20 @@ fi
 ### Update function
 ####################
 f_update () {
-echo $STAND"Running this update will down;load the latest version and will 
-place executable file named$GREEN wlm$STAND in your 'root' folder"
+echo $STAND"Running this update will download the latest version and 
+replace current wlm file with file named$GREEN wlm$STAND"
 echo -ne $STAND"Update to latest version ? y/n "$GREEN
 read UPD
 echo $STAND""
 if [[ $UPD == "y" || $UPD == "Y" ]] ; then 
 PATH=$(pwd)
-mv "$0" "wlm"
-wget -q http://wordlist-manipulator.googlecode.com/svn/wlm -O /$PATH/"$0.tmp"
-chmod +x /$PATH/"$0.tmp"
-mv "$0.tmp" "$0"
-echo $STAND"Latest WLM version has been downloaded to your root folder" 
-echo $RED"/root/wlm"$STAND
+mv $0 wlm
+wget -q http://wordlist-manipulator.googlecode.com/svn/wlm -O /$PATH/$0.tmp
+chmod +x /$PATH/$0.tmp
+mv $0.tmp $0
+echo $STAND"Latest WLM version has been downloaded to $GREEN$PATH/wlm$STAND" 
+echo "Please restart application with $GREEN./wlm$STAND"
+echo""
 exit
 else
 f_menu
@@ -2471,4 +2472,52 @@ fi
 #0.2 Released 18-10-2011
 # > Fixed bugs with suffixing numeric values to lists
 # > Increased speed of checking file information by using wc
-# > Included wordli
+# > Included wordlist size checker (crunch_size)
+# > Included a split option
+# > Tidied up code and updated help
+#
+#0.3 Released 18-12-2011
+# > Updated crunch_size to include estimated time based on user input on expected pwds/sec on their system.
+# > Updated Split options to include splitting by filesize.
+# > Tidied up how estimated number of files is calculated for split function.
+# > Tidied up various bits of code and made the code more 'uniform' in approach. 
+# > Included msg to advise of lines which wont be processed for the prefixing/suffixing of numbers (due to % char)
+# > Included removal/deletion options.
+# > Included date wordlist creation option with an updated datelist script.
+# > Included SSIDstrip to create SSID wordlists from kismet generated .nettxt files. 
+#
+#0.4 Released 09-06-2012
+# > Included possibility to invert the case in words (lower->upper & upper->lower).
+# > Included basic error checks to the datelist script to avoid erroneous input.
+# > Included possibility to remove words that do not have X number of numeric values.
+# > Included possibility to remove words with N number of repeated characters.
+# > Included basic leetifying options, not terribly happy with how that is done, but suppose better than nothing.
+# > Temporary (? ;) ) inclusion of Gitsnik's great permute.pl script also able to run on direct input 
+#   pending my pitiful bash endeavours to reproduce the same thing..
+#
+#0.5 Released 20-08-2012
+# > Fixed bug in datelist script that ignored July month -- Thanks to Stepking2
+# > Fixed bug in datelist leapyear script that caused whole century years to ignore Feburary -- Thanks to Stepking2
+# > Fixed bug in removal of last characters in word in menu option 9
+# > Replaced repetetive code with functions
+#
+#0.6
+# > Made all menus and queries, which weren't already, uniformly presented where possible.
+# > Included 7.3 Wordlist optimization option (sort on word/string length)
+# > Deleted the unused 8.3 menu option.
+# > Inlcuded option to delete words of a certain length from file. 
+#
+#0.7 
+# > Updated split options by including the -a switch variable to allow for sufficient suffix numbers depending on
+#   number of files which will be created when splitting files on linecount based on user input.
+# > Included rudimentary update function. To be improved..
+# 
+# To Do List 
+# ----------
+#  * Better inclusion of Gitsnik's permute script... ouch..headaches... :(
+#  * Verify OS / presence of required tools (pw-inspector) ?
+#  * ? Continue to make it better ? ;)
+# 
+#
+#
+
