@@ -1,7 +1,7 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.7 last edit 21-10-2012 16:20
-#
+# Version 0.7 last edit 21-10-2012 16:30
+# 0.7.21.10.2012.16.30
 # Credits to ; 
 # ============
 # Gitsnik, because he's awesome :)
@@ -2267,19 +2267,22 @@ NEW_VERS=$(sed -n 3p $LOC/wlm.tmp | cut -c 11-14)
 	rm $LOC/wlm.tmp
 	f_menu
 	elif [ $CURR_VERS != $NEW_VERS ] ; then
-	echo $STAND"Version in use is $CURR_VERS, latest available is $NEW_VES, update ? y/n "$GREEN
-		if [[ $UPD == "y" || $UPD == "Y" ]] ; then 
+	echo -ne $STAND"Version in use is v$GREEN$CURR_VERS$STAND, latest available is v$GREEN$NEW_VERS$STAND, update ? y/n "$GREEN
+	read UPD1
+		if [[ $UPD1 == "y" || $UPD1 == "Y" ]] ; then 
 		chmod +x $LOC/wlm.tmp
-		mv $LOCwlm.tmp $LOC/wlm
-		echo $STAND"Latest WLM version has been downloaded to $GREEN$LOC/wlm$STAND" 
-		echo "Please restart application"
-		echo ""
+		mv $LOC/wlm.tmp $LOC/wlm
+		echo $STAND"Latest WLM version has been saved to $GREEN$LOC/wlm$STAND" 
+		echo "Please restart application$GREEN wlm"$STAND
+		echo $STAND""
 		exit
 		else
+		echo $STAND""
 		f_menu
 		fi
 	fi
 else		
+echo $STAND ""
 f_menu
 fi
 }
