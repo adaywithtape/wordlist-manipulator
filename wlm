@@ -1,6 +1,6 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.7 last edit 21-10-2012 13:25
+# Version 0.7 last edit 21-10-2012 15:00
 #
 # Credits to ; 
 # ============
@@ -2243,11 +2243,11 @@ read UPD
 echo $STAND""
 LOC=$(pwd)
 if [[ $UPD == "y" || $UPD == "Y" ]] ; then 
-wget -q http://wordlist-manipulator.googlecode.com/svn/wlm -O wlm.tmp
-chmod +x wlm.tmp
-mv wlm.tmp wlm
+wget -q http://wordlist-manipulator.googlecode.com/svn/wlm -O $LOC/wlm.tmp
+chmod +x $LOC/wlm.tmp
+mv $LOCwlm.tmp $LOC/wlm
 echo $STAND"Latest WLM version has been downloaded to $GREEN$LOC$STAND" 
-echo "Please restart application with $GREEN./wlm$STAND"
+echo "Please restart application"
 echo ""
 exit
 else
