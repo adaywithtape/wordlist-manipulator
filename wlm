@@ -1,6 +1,6 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.7 last edit 21-10-2012 15:40
+# Version 0.7 last edit 21-10-2012 16:20
 #
 # Credits to ; 
 # ============
@@ -2239,18 +2239,32 @@ fi
 ### Update function
 ####################
 f_update () {
+clear
+echo $STAND"Wordlist Manipulator"
+echo $BLUE"Check for updates"
+echo $STAND"--------------------"
+echo
 echo -ne $STAND"Check the latest version available ? y/n "$GREEN
 read UPD
 echo $STAND""
 LOC=$(pwd)
 if [[ $UPD == "y" || $UPD == "Y" ]] ; then 
+echo $GREEN">$STAND Checking Internet connection.."
+wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /dev/null
+if [ ! -s /tmp/index.google ];then
+	echo $RED"No internet connection found..$STAND"
+	sleep 2
+	f_menu
+fi
 echo $GREEN">$STAND Downloading latest version for checking.." 
 wget -q http://wordlist-manipulator.googlecode.com/svn/wlm -O $LOC/wlm.tmp
 echo $GREEN">$STAND Checking if latest version in use.."
 CURR_VERS=$(sed -n 3p $0 | cut -c 11-14)
 NEW_VERS=$(sed -n 3p $LOC/wlm.tmp | cut -c 11-14)
 	if [ $CURR_VERS == $NEW_VERS ] ; then 
-	echo $STAND"Current version in use is the latest version available;$GREEN v$NEW_VERS$STAND"
+	echo $RED"Current version in use is the latest version available;$GREEN v$NEW_VERS$STAND"
+	sleep 3
+	rm $LOC/wlm.tmp
 	f_menu
 	elif [ $CURR_VERS != $NEW_VERS ] ; then
 	echo $STAND"Version in use is $CURR_VERS, latest available is $NEW_VES, update ? y/n "$GREEN
