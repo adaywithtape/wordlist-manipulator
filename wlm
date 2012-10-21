@@ -1,7 +1,7 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.7 last edit 21-10-2012 16:30
-# 0.7.21.10.2012.16.30
+# Version 0.7 last edit 21-10-2012 17:00
+# 07.21.10.2012.16.30
 # Credits to ; 
 # ============
 # Gitsnik, because he's awesome :)
@@ -2139,6 +2139,12 @@ tape dot rulez at gmail dot com
 
 ALL OPTIONS 
 -----------
+
+Running the script followed by a word will create all possible permutations of that 
+word (Gitsnik's permute.pl script).
+Running the script without any input will offer a menu with the below items ;
+
+
 1. Case Options;
 	1.1	Change case of first letter of each word in the wordlist.
 	1.2	Change case of last letter of each word in the wordlist.
@@ -2267,7 +2273,7 @@ NEW_VERS=$(sed -n 3p $LOC/wlm.tmp | cut -c 11-14)
 	rm $LOC/wlm.tmp
 	f_menu
 	elif [ $CURR_VERS != $NEW_VERS ] ; then
-	echo -ne $STAND"Version in use is v$GREEN$CURR_VERS$STAND, latest available is v$GREEN$NEW_VERS$STAND, update ? y/n "$GREEN
+	echo -ne $STAND"Version in use is $GREEN$CURR_VERS$STAND, latest available is $GREEN$NEW_VERS$STAND, update ? y/n "$GREEN
 	read UPD1
 		if [[ $UPD1 == "y" || $UPD1 == "Y" ]] ; then 
 		chmod +x $LOC/wlm.tmp
@@ -2532,13 +2538,13 @@ fi
 # > Fixed bug in removal of last characters in word in menu option 9
 # > Replaced repetetive code with functions
 #
-#0.6
+#0.6 Released 26-09-2012
 # > Made all menus and queries, which weren't already, uniformly presented where possible.
 # > Included 7.3 Wordlist optimization option (sort on word/string length)
 # > Deleted the unused 8.3 menu option.
 # > Inlcuded option to delete words of a certain length from file. 
 #
-#0.7 
+#0.7 Released 21-10-2012
 # > Updated split options by including the -a switch variable to allow for sufficient suffix numbers depending on
 #   number of files which will be created when splitting files on linecount based on user input.
 # > Included rudimentary update function. To be improved..
