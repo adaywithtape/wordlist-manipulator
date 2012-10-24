@@ -2069,7 +2069,7 @@ echo $BLUE"__    __ _     __  __
  \_/\_/ |____||_|\/|_|$STAND
 by TAPE"
 echo ""
-echo $BLUE"WordList Manipulator$RED v0.7"$STAND
+echo $BLUE"WordList Manipulator$RED v0.8"$STAND
 echo $STAND""
 echo  -ne "Hit enter to continue "
 read continue 
@@ -2287,7 +2287,7 @@ Latest available is $GREEN$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND, update ?
 		fi
 
 	elif [ $CURR_VERS == $NEW_VERS ] && [ $CURR_BUILD == $NEW_BUILD ] ; then
-	echo $RED"Current version in use is the latest version available;$GREEN v$NEW_VERS$STAND build$NEW_BUILD"
+	echo $RED"Current version in use is the latest version available;$GREEN v$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND"
 	sleep 3
 	rm $LOC/wlm.tmp
 	f_menu
