@@ -2271,12 +2271,13 @@ CURR_BUILD=$(sed -n 4p $0 | cut -c 10-14)
 NEW_BUILD=$(sed -n 4p $LOC/wlm.tmp | cut -c 10-14)
 
 	if [ $CURR_VERS != $NEW_VERS ] || [ $CURR_BUILD -lt $NEW_BUILD ] ; then
-	echo -ne $STAND"Version in use is $GREEN$CURR_VERS$STAND, build $GREEN$CURR_BUILD$STAND
+	echo -ne $STAND"Version in use is $GREEN$CURR_VERS$STAND build $GREEN$CURR_BUILD$STAND
 Latest available is $GREEN$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND, update ? y/n "$GREEN
 	read UPD1
 		if [[ $UPD1 == "y" || $UPD1 == "Y" ]] ; then 
 		chmod +x $LOC/wlm.tmp
 		mv $LOC/wlm.tmp $LOC/wlm
+		echo $STAND""
 		echo $STAND"Latest WLM version has been saved to $GREEN$LOC/wlm$STAND" 
 		echo "Please restart application$GREEN wlm"$STAND
 		echo $STAND""
