@@ -2283,6 +2283,7 @@ Latest available is $GREEN$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND, update ?
 		echo $STAND""
 		exit
 		else
+		rm $LOC/wlm.tmp
 		echo $STAND""
 		f_menu
 		fi
