@@ -1,6 +1,6 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.8 last edit 24-10-2012 12:00
+# Version 0.8 last edit 24-10-2012 10:30
 # Build: 0801
 # Credits to ; 
 # ============
@@ -15,6 +15,8 @@ RED=$(tput setaf 1 && tput bold)
 GREEN=$(tput setaf 2 && tput bold)
 STAND=$(tput sgr0)
 BLUE=$(tput setaf 6 && tput bold)
+CURR_VERS=$(sed -n 3p $0 | cut -c 11-14)
+CURR_BUILD=$(sed -n 4p $0 | cut -c 10-14)
 #
 #
 #--------------
@@ -2069,7 +2071,7 @@ echo $BLUE"__    __ _     __  __
  \_/\_/ |____||_|\/|_|$STAND
 by TAPE"
 echo ""
-echo $BLUE"WordList Manipulator$RED v0.8"$STAND
+echo $BLUE"WordList Manipulator$RED v$CURR_VERS"$STAND
 echo $STAND""
 echo  -ne "Hit enter to continue "
 read continue 
@@ -2265,9 +2267,7 @@ wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /de
 echo $GREEN">$STAND Downloading latest version for checking.." 
 wget -q http://wordlist-manipulator.googlecode.com/svn/wlm -O $LOC/wlm.tmp
 echo $GREEN">$STAND Checking if latest version in use.."
-CURR_VERS=$(sed -n 3p $0 | cut -c 11-14)
 NEW_VERS=$(sed -n 3p $LOC/wlm.tmp | cut -c 11-14)
-CURR_BUILD=$(sed -n 4p $0 | cut -c 10-14)
 NEW_BUILD=$(sed -n 4p $LOC/wlm.tmp | cut -c 10-14)
 
 	if [ $CURR_VERS != $NEW_VERS ] || [ $CURR_BUILD -lt $NEW_BUILD ] ; then
