@@ -1,6 +1,6 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.8 last edit 25-10-2012 12:30
+# Version 0.8 last edit 25-10-2012 13:30
 # Build: 0802
 # Credits to ; 
 # ============
@@ -2562,6 +2562,8 @@ fi
 #0.8 Released 24-10-2012
 #Build 0801
 # > Improved update function by introducing builds for easier future update checks. 
+#Build 0802
+# > Included mention of this list of changes when updating.
 #
 # 
 # To Do List 
@@ -2570,3 +2572,4 @@ fi
 #  * Verify OS / presence of required tools (pw-inspector) ?
 #  * Include reverse option ?
 #  * ? Continue to make it better ? ;)
+
