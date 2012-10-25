@@ -1,7 +1,7 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.8 last edit 24-10-2012 10:30
-# Build: 0801
+# Version 0.8 last edit 25-10-2012 12:30
+# Build: 0802
 # Credits to ; 
 # ============
 # Gitsnik, because he's awesome :)
@@ -15,8 +15,8 @@ RED=$(tput setaf 1 && tput bold)
 GREEN=$(tput setaf 2 && tput bold)
 STAND=$(tput sgr0)
 BLUE=$(tput setaf 6 && tput bold)
-CURR_VERS=$(sed -n 3p $0 | cut -c 11-14)
-CURR_BUILD=$(sed -n 4p $0 | cut -c 10-14)
+CURR_VERS=$(sed -n 3p $0 | cut -c 11-13)
+CURR_BUILD=$(sed -n 4p $0 | cut -c 10-13)
 #
 #
 #--------------
@@ -2267,8 +2267,8 @@ wget -q --tries=10 --timeout=5 http://www.google.com -O /tmp/index.google &> /de
 echo $GREEN">$STAND Downloading latest version for checking.." 
 wget -q http://wordlist-manipulator.googlecode.com/svn/wlm -O $LOC/wlm.tmp
 echo $GREEN">$STAND Checking if latest version in use.."
-NEW_VERS=$(sed -n 3p $LOC/wlm.tmp | cut -c 11-14)
-NEW_BUILD=$(sed -n 4p $LOC/wlm.tmp | cut -c 10-14)
+NEW_VERS=$(sed -n 3p $LOC/wlm.tmp | cut -c 11-13)
+NEW_BUILD=$(sed -n 4p $LOC/wlm.tmp | cut -c 10-13)
 
 	if [ $CURR_VERS != $NEW_VERS ] || [ $CURR_BUILD -lt $NEW_BUILD ] ; then
 	echo -ne $STAND"Version in use is $GREEN$CURR_VERS$STAND build $GREEN$CURR_BUILD$STAND
@@ -2278,7 +2278,10 @@ Latest available is $GREEN$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND, update ?
 		chmod +x $LOC/wlm.tmp
 		mv $LOC/wlm.tmp $LOC/wlm
 		echo $STAND""
-		echo $STAND"Latest WLM version has been saved to $GREEN$LOC/wlm$STAND" 
+		echo $STAND"Latest WLM version has been saved to $GREEN$LOC/wlm$STAND"
+		echo $STAND""
+		tail -n 30 $LOC/wlm | sed -n "/$CURR_VERS/,$p"
+		echo $STAND""
 		echo "Please restart application$GREEN wlm"$STAND
 		echo $STAND""
 		exit
@@ -2556,18 +2559,15 @@ fi
 #   number of files which will be created when splitting files on linecount based on user input.
 # > Included rudimentary update function. To be improved..
 #
+#0.8 Released 24-10-2012
 #Build 0801
 # > Improved update function by introducing builds for easier future update checks. 
-#
 #
 # 
 # To Do List 
 # ----------
-#  * Better inclusion of Gitsnik's permute script... ouch..headaches... :(
+#  * Specify list of changes when updating ? 
 #  * Verify OS / presence of required tools (pw-inspector) ?
-#  * Include reverse option
+#  * Include reverse option ?
 #  * ? Continue to make it better ? ;)
-# 
-#
-#
 
