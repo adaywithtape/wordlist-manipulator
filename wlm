@@ -2568,7 +2568,6 @@ fi
 # 
 # To Do List 
 # ----------
-#  * Specify list of changes when updating ? 
 #  * Verify OS / presence of required tools (pw-inspector) ?
 #  * Include reverse option ?
 #  * ? Continue to make it better ? ;)
