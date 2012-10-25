@@ -2280,7 +2280,7 @@ Latest available is $GREEN$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND, update ?
 		echo $STAND""
 		echo $STAND"Latest WLM version has been saved to $GREEN$LOC/wlm$STAND"
 		echo $STAND""
-		tail -n 30 $LOC/wlm | sed -n "/$CURR_VERS/,$p"
+		tail -n 30 $LOC/wlm | sed -n /$CURR_VERS/,\$p"
 		echo $STAND""
 		echo "Please restart application$GREEN wlm"$STAND
 		echo $STAND""
