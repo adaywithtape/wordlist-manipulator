@@ -1,3 +1,5 @@
+#summary Brief intro and full list of all options.
+
 = Introduction =
 
 *WLM (Wordlist Manipulator)*
