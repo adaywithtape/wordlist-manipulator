@@ -1,25 +1,29 @@
 #summary General Usage of WLM.
 
-= Introduction =
+= Starting the script =
 
 
-First the script has to be made executable: chmod +x wlm
+To allow the script to run make it executable: 
+{{{
+chmod +x wlm
+}}}
 
-
-
-
+= Runing the script =
 
 
 WLM can be used in 2 ways ; 
 
-*To list all possible permutations of a (single) word using Gitsnik's permute.pl script
+*List all possible permutations of a (single) word using Gitsnik's permute.pl script.
 
 *Alter a wordlist following the options as seen in the options menu.
 
+Running wlm on a single word to list all possible permutations of that word (in this example the word 'one') ;
+{{{
+./wlm one
+}}}
 
-= Details =
+Running the script to get the options menu ;
+{{{
+./wlm
+}}}
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
