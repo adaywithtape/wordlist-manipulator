@@ -1,6 +1,6 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.8 last edit 26-10-2012 14:30
+# Version 0.8 last edit 26-10-2012 15:30
 # Build: 0803
 # Credits to ; 
 # ============
@@ -2071,7 +2071,7 @@ echo $BLUE"__    __ _     __  __
  \_/\_/ |____||_|\/|_|$STAND
 by TAPE"
 echo ""
-echo $BLUE"WordList Manipulator$RED v$CURR_VERS"$STAND
+echo $BLUE"WordList Manipulator$RED v$CURR_VERS$STAND build $RED$CURR_BUILD$STAND"
 echo $STAND""
 echo  -ne "Hit enter to continue "
 read continue 
@@ -2276,11 +2276,7 @@ Latest available is $GREEN$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND, update ?
 	read UPD1
 		if [[ $UPD1 == "y" || $UPD1 == "Y" ]] ; then 
 		chmod +x $LOC/wlm.tmp
-			if [ -d /opt/backbox ] ; then
-			sudo cp $LOC/wlm.tmp /opt/wlm/wlm
-			sudo cp $LOC/wlm.tmp /usr/bin/wlm
-			fi
-		sudo mv $LOC/wlm.tmp $LOC/wlm
+		mv $LOC/wlm.tmp $LOC/wlm
 		echo $STAND""
 		echo $STAND"Latest WLM version has been saved to $GREEN$LOC/wlm$STAND"
 		echo $STAND""
@@ -2572,7 +2568,7 @@ fi
 # > Included an 'echo' when quitting from main menu to prevent colour from being altered in terminal
 #   upon quitting in BBox.
 # > Corrected few typoes
-# > Trials on sudo-ing some commands for better update implementation on BBox
+# > Included build number when calling for version info. 
 #
 # To Do List 
 # ----------
