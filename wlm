@@ -1,6 +1,6 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.8 last edit 26-10-2012 08:30
+# Version 0.8 last edit 26-10-2012 14:30
 # Build: 0803
 # Credits to ; 
 # ============
@@ -2207,7 +2207,7 @@ also space does not work, so this function has some limitations.
 	9.1	Remove characters at a certain position from start of word.
 	9.2	Remove characters at a certain position before end of word.
 	9.3	Remove specific characters globally from words.
-	9.4 	Removing words containing specific characters from wordlist.
+	9.4 	Remove words containing specific characters from wordlist.
 	9.5	Remove words with more than X number of identical adjacent characters from wordlist.
 	9.6	Remove words existing in 1 list from another list (test version only for small lists).
 	9.7	Remove words that do not have X number of numeric values.
@@ -2276,7 +2276,11 @@ Latest available is $GREEN$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND, update ?
 	read UPD1
 		if [[ $UPD1 == "y" || $UPD1 == "Y" ]] ; then 
 		chmod +x $LOC/wlm.tmp
-		mv $LOC/wlm.tmp $LOC/wlm
+			if [ -d /opt/backbox ] ; then
+			sudo cp $LOC/wlm.tmp /opt/wlm/wlm
+			sudo cp $LOC/wlm.tmp /usr/bin/wlm
+			fi
+		sudo mv $LOC/wlm.tmp $LOC/wlm
 		echo $STAND""
 		echo $STAND"Latest WLM version has been saved to $GREEN$LOC/wlm$STAND"
 		echo $STAND""
@@ -2560,11 +2564,18 @@ fi
 # > Included rudimentary update function. To be improved..
 #
 #0.8 Released 24-10-2012
-#Build 0801
+# Build 0801
 # > Improved update function by introducing builds for easier future update checks. 
-#Build 0802   25-10-2012
+# Build 0802   25-10-2012
 # > Included mention of this list of changes when updating.
-#Build 0803   26-10-2012
-#  > Included an 'echo' when quitting from main menu to prevent colour from being altered in console upon
-#    quitting (in BBox).
-#    
+# Build 0803   26-10-2012
+# > Included an 'echo' when quitting from main menu to prevent colour from being altered in terminal
+#   upon quitting in BBox.
+# > Corrected few typoes
+# > Trials on sudo-ing some commands for better update implementation on BBox
+#
+# To Do List 
+# ----------
+#  * Verify OS / presence of required tools (pw-inspector) ?
+#  * Include reverse option ?
+#  * ? Continue to make it better ? ;)
