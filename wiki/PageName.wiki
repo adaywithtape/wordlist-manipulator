@@ -1,4 +1,4 @@
-#summary All options possible with WLM.
+#All WLM options.
 
 = Introduction =
 
@@ -109,6 +109,4 @@ Each main option has a submenu and the full range of options are ;
 
 
 *u. Check for updates to the script.*
-
-
 
