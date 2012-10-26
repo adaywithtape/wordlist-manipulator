@@ -1,7 +1,7 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.8 last edit 25-10-2012 13:30
-# Build: 0802
+# Version 0.8 last edit 26-10-2012 08:30
+# Build: 0803
 # Credits to ; 
 # ============
 # Gitsnik, because he's awesome :)
@@ -2298,7 +2298,7 @@ Latest available is $GREEN$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND, update ?
 	f_menu
 	fi
 else		
-echo $STAND ""
+echo $STAND""
 f_menu
 fi
 }
@@ -2401,8 +2401,8 @@ case $menu in
 f) f_info ;;
 h) f_help ;;
 u) f_update ;;
-q) exit ;; 
-Q) exit ;;
+q) echo $STAND"" && exit ;; 
+Q) echo $STAND"" && exit ;;
 *) echo $RED"\"$menu\" is not a valid menu item "$STAND; sleep 0.5 ;;
 esac
 done
@@ -2505,7 +2505,7 @@ sub permute {
 }
 ' > wlm_permute.pl
 echo $INPUT | perl wlm_permute.pl
-echo "
+echo $STAND"
 Thanks to Gitsnik's permute.pl script
 -------------------------------------
 "
@@ -2555,20 +2555,16 @@ fi
 # > Inlcuded option to delete words of a certain length from file. 
 #
 #0.7 Released 21-10-2012
-# > Updated split options by including the -a switch variable to allow for sufficient suffix numbers depending on
-#   number of files which will be created when splitting files on linecount based on user input.
+# > Updated split options by including the -a switch variable to allow for sufficient suffix numbers 
+#   depending on for files which will be created when splitting files on linecount based on user input.
 # > Included rudimentary update function. To be improved..
 #
 #0.8 Released 24-10-2012
 #Build 0801
 # > Improved update function by introducing builds for easier future update checks. 
-#Build 0802
+#Build 0802   25-10-2012
 # > Included mention of this list of changes when updating.
-#
-# 
-# To Do List 
-# ----------
-#  * Verify OS / presence of required tools (pw-inspector) ?
-#  * Include reverse option ?
-#  * ? Continue to make it better ? ;)
-
+#Build 0803   26-10-2012
+#  > Included an 'echo' when quitting from main menu to prevent colour from being altered in console upon
+#    quitting (in BBox).
+#    
