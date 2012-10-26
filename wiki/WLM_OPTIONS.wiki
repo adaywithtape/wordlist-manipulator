@@ -1,4 +1,4 @@
-#summary Brief intro and full list of all options.
+#summary Intro and full list of options.
 
 = Introduction =
 
