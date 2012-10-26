@@ -2,7 +2,19 @@
 
 = Introduction =
 
-Add your content here.
+
+First the script has to be made executable: chmod +x wlm
+
+
+
+
+
+
+WLM can be used in 2 ways ; 
+
+*To list all possible permutations of a (single) word using Gitsnik's permute.pl script
+
+*Alter a wordlist following the options as seen in the options menu.
 
 
 = Details =
