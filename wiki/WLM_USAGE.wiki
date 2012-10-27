@@ -51,3 +51,28 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/wlm_v0-7.png
 ----
 
 = Using the options menu =
+
+All the options from 1 through to 9 work in the same way ;
+
+After choosing the main option in options menu, you are presented with a sub-menu.
+
+After choosing the required item from the sub-menu, you are prompted to enter an input file and an output file.
+
+Then depending on the option chosen, some further input may be required after which the wordlist will be processed and the output file will be written.
+
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/Screenshot-wlm07.jpg
+
+----
+
+There are verifications in place to check for the existance of the wordlist to be manipulated;
+
+If you enter an incorrect input filename, you will be warned and prompted to enter correct /path/to/wordlist. 
+
+
+There are also some safeguards put in place in the script to ensure that you dont accidentally overwrite existing files;
+
+If you enter an output filename which already exists, you will be warned that it will be overwritten and prompted to accept or not.
+
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/Screenshot-wlm08.jpg
+
+
