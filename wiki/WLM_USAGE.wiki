@@ -84,9 +84,9 @@ sudo wlm
 
 ----
 
-For information on usage of remaing tools;
+For information on usage of remaining items;
 
-- Option 10
+- tools in Menu Option 10
 
 - File information
 
