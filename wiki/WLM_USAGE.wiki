@@ -34,25 +34,10 @@ sudo dpkg -i wlm-0.0.7_all.deb
 Running wlm on a single word to list all possible permutations of that word (in this example the word 'one') ;
 {{{
 ./wlm one
-on3
-onE
-one
-oN3
-oNE
-oNe
-On3
-OnE
-One
-ON3
-ONE
-ONe
-0n3
-0nE
-0ne
-0N3
-0NE
-0Ne
 }}}
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/wlm_screenshot_06.jpg
+
+----
 
 Running the script to get the options menu ;
 {{{
