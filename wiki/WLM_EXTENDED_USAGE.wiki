@@ -1,0 +1,57 @@
+#summary Usage of other options in menu item 10 & file info & update
+
+= Other options = 
+ _Menu option 10 Miscellaneous fun_
+
+ _Menu option f  File Information_
+
+ _Menu option h  Version information and listing of all functions_
+
+ _Menu option u  Check for updates_
+
+
+
+= Menu Option 10 =
+
+Sub-menu for option 10. *Miscellaneous fun* consists of;
+ # Check possible wordlist sizes (with same min-max length only).
+ # Create a wordlist from a range of dates (datelist).
+ # Strip SSIDs from a kismet generated .nettxt file.
+ # Basic leetify options for wordlist.
+ # Leetify/Permute wordlist (Gitsnik's permute.pl script)
+
+----
+
+*10.1 check possible wordlist sizes*
+
+This is a small script to check what the size would be of a wordlist created with for instance 'crunch'.
+It only calculates sizes based on the same min/max length of words.
+
+You are prompted to enter ; 
+ - the number of characters that would be used in creating the wordlist
+
+ - the length of the words in wordlist (for instance 8, the minumum length for WPA)
+
+ - the number of passphrases your system can handle per second
+(you can leave this item blank) 
+
+The script will then calculate the estimated number of lines/words in the wordlist.
+
+If you entered how many passphrases/sec your system can handle, then it will also show you an estimate on how much time it would take to go through such a wordlist.(not the creation time)
+
+Finally it will show the estimated size of the wordlist in Bytes through to Petabytes. 
+
+
+
+
+
+
+
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
