@@ -1,29 +1,65 @@
 #summary General Usage of WLM.
 
-= Starting the script =
+= Installing the script =
+*BackTrack*
 
+Download the script to directory of your choice, for instance /root/ ;
+{{{
+wget -q http://wordlist-manipulator.googlecode.com/svn/wlm -O /root/wlm
+}}}
 
 To allow the script to run make it executable: 
 {{{
-chmod +x wlm
+chmod +x /root/wlm
 }}}
 
-= Runing the script =
+*BackBox Linux*
+
+Either follow the same as above for BackTrack, or grab the deb package that ZEROF from BackBox kindly put together; 
+{{{
+wget http://wordlist-manipulator.googlecode.com/files/wlm-0.0.7_all.deb
+sudo dpkg -i wlm-0.0.7_all.deb
+}}}
+
+----
 
 
-WLM can be used in 2 ways ; 
+= Running the script =
 
-*List all possible permutations of a (single) word using Gitsnik's permute.pl script.
 
-*Alter a wordlist following the options as seen in the options menu.
+* *WLM can be used in 2 ways ;*
+ # List all possible permutations of a (single) word using Gitsnik's permute.pl script.
+ # Alter a wordlist following the options as seen in the options menu.
 
 Running wlm on a single word to list all possible permutations of that word (in this example the word 'one') ;
 {{{
 ./wlm one
+on3
+onE
+one
+oN3
+oNE
+oNe
+On3
+OnE
+One
+ON3
+ONE
+ONe
+0n3
+0nE
+0ne
+0N3
+0NE
+0Ne
 }}}
 
 Running the script to get the options menu ;
 {{{
 ./wlm
 }}}
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/wlm_v0-7.png
+
+
+
 
