@@ -47,7 +47,7 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/crunch_size_wiki.png
 
 *10.2 Create a wordlist based on dates _(datelist)_*
 
-This script will create a wordlist (numeric) based on a given range of dates.
+This script will create a date wordlist (numeric) based on a given range of dates.
 
 You are first prompted for a start date in format yyyy-mm-dd
 
@@ -66,22 +66,58 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/dates_wiki.png
 ----
 *10.3 Strip SSIDs from a kismet generated .nettxt file*
 
+This script is intended to strip SSIDs from a Kismet generated .nettxt file. 
+This can be used to for instance create wordlists with a great number of real-world SSIDs which can be used together with mdk3 to audit hidden SSIDs.
+
+Same as usual, you are prompted for input .nettxt file, and also for an output file for the SSIDs.  
+
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/ssid_strip_wiki-1.jpg
+
 ----
 
 *10.4 Basic leetify options for wordlist*
+
+This is a basic form of 'leetifying' a wordlist by choosing which types of letter alteration you want to use.
+
+You will be prompted for an input file and an output file.
+
+Then you will be prompted to choose from a list of different letter alteration possibilities.
+
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/leet_wiki.png
 
 ----
 
 *10.5 Leetif/Permute wordlist (Gitsnik's permute.pl script)*
 
+This script is written by Gitsnik, and I shamelessly included it ;) 
+
+It created all possible permutations of the letters in each word and writes these to a new file. 
+The only drawback is that this can *massively* increase the wordlist size.
+
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/permute_wiki.png
 ----
 
 = Menu Option f File Information = 
 
+Simply enter a filename and the script will go through it and list ; 
+ - Filetype
+ - Number of lines
+ - Longest line 
+ - File size
+ - First and last 3 lines of the file
+
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/file_info_wiki.png
 ----
 
 = Menu Option h Version and listing of all functions =
 
+
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/version_wiki.png
+
 ----
 
 = Menu Option u Check for updates = 
+
+
+
+
