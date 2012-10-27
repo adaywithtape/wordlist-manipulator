@@ -1,13 +1,13 @@
-#summary Usage of other options in menu item 10 & file info & update
+#summary Usage of other options in menu item 10, File Info, Version & Update
 
 = Other options = 
- _Menu option 10 Miscellaneous fun_
+ * Menu option 10 Miscellaneous fun
 
- _Menu option f  File Information_
+ * Menu option f  File Information
 
- _Menu option h  Version information and listing of all functions_
+ * Menu option h  Version information and listing of all functions
 
- _Menu option u  Check for updates_
+ * Menu option u  Check for updates
 
 
 
