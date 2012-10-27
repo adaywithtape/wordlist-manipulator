@@ -129,7 +129,7 @@ _(entering anything else than just 'Enter' will take you back to main menu)_
 
 = Menu Option u Check for updates = 
 
-The update function was initially created for use on BackTrack and still needs some fine-tuning to get it to work as intended on other distros. 
+_The update function was initially created for use on BackTrack and still needs some fine-tuning to get it to work as intended on other distros._
 
 When running the update function it will check for internet connectivity and if found in order, will continue.
 
@@ -138,6 +138,8 @@ The latest version is downloaded from google code and compares version and build
 If found that the downloaded version is newer than the version in use, you will be prompted to accept update or not. 
 
 If accepted, then the temp file downloaded will be renamed to 'wlm' and should replace the old wlm file. 
+
+Information will be shown on the changes/updates from previous version to the new version.
 
 The script will then stop and prompt to restart.
 
