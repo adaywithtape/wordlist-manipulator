@@ -41,17 +41,31 @@ If you entered how many passphrases/sec your system can handle, then it will als
 
 Finally it will show the estimated size of the wordlist in Bytes through to Petabytes. 
 
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/crunch_size_wiki.png
+
+----
+
+*10.2 Create a wordlist based on dates _(datelist)_*
+
+This script will create date wordlists (numeric) based on start and end dates.
+
+You are first prompted for a start date in format yyyy-mm-dd
+
+Then you are prompted for an end date in format yyyy-mm-dd
+
+You then need to enter an output file name for the wordlist
+
+You can then enter the desired output format of the date 
+
+Finally you can enter whether you want a spacing character in between days/months/years or not.
+
+The script will list all dates in between the dates as specified and will use the output format as chosen as well as include the spacing character if one was entered.
+
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/dates_wiki.png
+
+
+----
 
 
 
 
-
-
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
