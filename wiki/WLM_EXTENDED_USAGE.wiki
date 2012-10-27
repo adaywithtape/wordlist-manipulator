@@ -87,7 +87,7 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/leet_wiki.png
 
 ----
 
-*10.5 Leetif/Permute wordlist (Gitsnik's permute.pl script)*
+*10.5 Leetify/Permute wordlist (Gitsnik's permute.pl script)*
 
 This script is written by Gitsnik, and I shamelessly included it ;) 
 
@@ -117,7 +117,5 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/version_wiki.png
 ----
 
 = Menu Option u Check for updates = 
-
-
 
 
