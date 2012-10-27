@@ -13,8 +13,8 @@ wlm was written for use on BackTrack linux, however provided the required permis
 wlm is intended to simplify wordlist manipulation tasks by having the most common wordlist manipulation tasks done through an clear menu.
 
  
-= Details =
-ALL OPTIONS
+= ALL OPTIONS =
+
 
 Each main option has a submenu and the full range of options are ; 
 
