@@ -1,6 +1,6 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.8 last edit 26-10-2012 22:15
+# Version 0.8 last edit 26-10-2012 23:05
 # Build: 0804
 # Credits to ; 
 # ============
@@ -88,9 +88,9 @@ f_inout
 	done
     echo $STAND"Working .."
     if [ "$last_letter" == "l" ] || [ "$last_letter" == "L" ] ; then
-    sed 's/.$/\l&/' $wlm_infile > $wlm_outfile
+    sudo -u root sed 's/.$/\l&/' $wlm_infile > $wlm_outfile
     elif [ "$last_letter" == "u" ] || [ "$last_letter" == "U" ] ; then
-    sed 's/.$/\u&/' $wlm_infile > $wlm_outfile
+    sudo -u root sed 's/.$/\u&/' $wlm_infile > $wlm_outfile
     fi
     echo $STAND""
 f_complete
@@ -104,7 +104,7 @@ echo $BLUE"Change all lower case to Upper case"$STAND
 echo $STAND""
 f_inout
     echo $STAND"Working .."
-    tr '[:lower:]' '[:upper:]' < $wlm_infile > $wlm_outfile
+    sudo -u root tr '[:lower:]' '[:upper:]' < $wlm_infile > $wlm_outfile
     echo $STAND""
 f_complete
 #
@@ -117,7 +117,7 @@ echo $BLUE"Change all Upper case to lower case"$STAND
 echo $STAND""
 f_inout
     echo $STAND"Working .."
-    tr '[:upper:]' '[:lower:]' < $wlm_infile > $wlm_outfile
+    sudo -u root tr '[:upper:]' '[:lower:]' < $wlm_infile > $wlm_outfile
     echo $STAND""
 f_complete
 #
@@ -130,7 +130,7 @@ echo $BLUE"Invert case from original input"$STAND
 echo $STAND""
 f_inout
     echo $STAND"Working .."
-    tr 'a-z A-Z' 'A-Z a-z' < $wlm_infile > $wlm_outfile
+    sudo -u root tr 'a-z A-Z' 'A-Z a-z' < $wlm_infile > $wlm_outfile
     echo $STAND""
 f_complete
 fi
@@ -196,7 +196,7 @@ if [ "$comb_menu" == "1" ] ; then
 	fi
   fi
 echo $STAND"Working .."
-awk > $wlm_outfile 'NR == FNR {
+sudo -u root awk > $wlm_outfile 'NR == FNR {
   l2[FNR] = $0
   fnr = FNR; next
   }
@@ -251,7 +251,7 @@ echo $STAND""
 	f_menu
 	fi
     fi
-        cat $directory/* >> "$wlm_outfile"
+        sudo -u root cat $directory/* >> "$wlm_outfile"
 	echo $STAND""
 f_complete
 fi
@@ -441,7 +441,7 @@ f_inout
 echo -ne $STAND"Enter word/characters you want prefixed: "$GREEN
 read pref_char
 echo $STAND"Working .."
-sed "s/^./"$pref_char"&/" "$wlm_infile" > "$wlm_outfile" 
+sudo -u root sed "s/^./"$pref_char"&/" "$wlm_infile" > "$wlm_outfile" 
 echo $STAND""
 f_complete
 fi
@@ -631,7 +631,7 @@ f_inout
 echo -ne $STAND"Enter word/characters you want suffixed: "$GREEN
 read suf_char
 echo $STAND"Working .."
-sed "s/.$/&"$suf_char"/" "$wlm_infile" > "$wlm_outfile" 
+sudo -u root sed "s/.$/&"$suf_char"/" "$wlm_infile" > "$wlm_outfile" 
 echo $STAND""
 f_complete
 fi
@@ -678,7 +678,7 @@ echo -ne $STAND"Enter from what position (after how many characters)
 the word/characters should be included: "$GREEN
 read inclus_pos
 echo $STAND"Working .."
-sed "s/^.\{$inclus_pos\}/&$inclu_char/" "$wlm_infile" > "$wlm_outfile" 
+sudo -u root sed "s/^.\{$inclus_pos\}/&$inclu_char/" "$wlm_infile" > "$wlm_outfile" 
 echo $STAND""
 f_complete
 #
@@ -696,7 +696,7 @@ echo -ne $STAND"Enter before what position (before how many characters before en
 the word/characters should be included: "$GREEN
 read inclus_pos
 echo $STAND"Working .."
-sed "s/.\{$inclus_pos\}$/$inclu_char&/" "$wlm_infile" > "$wlm_outfile" 
+sudo -u root sed "s/.\{$inclus_pos\}$/$inclu_char&/" "$wlm_infile" > "$wlm_outfile" 
 echo $STAND""
 f_complete
 fi 
@@ -743,7 +743,7 @@ read subs_char
 echo -ne $STAND"Enter the number of characters from start of word to replace: "$GREEN
 read subs_num
 echo $STAND"Working .." 
-sed "s/^.\{$subs_num\}/$subs_char/" "$wlm_infile" > "$wlm_outfile" 
+sudo -u root sed "s/^.\{$subs_num\}/$subs_char/" "$wlm_infile" > "$wlm_outfile" 
 echo $STAND""
 f_complete
 #
@@ -760,7 +760,7 @@ read subs_char
 echo -ne $STAND"Enter the number of characters at the end of word you want to replace: "$GREEN
 read subs_num
 echo $STAND"Working .." 
-sed "s/.\{$subs_num\}$/$subs_char/" "$wlm_infile" > "$wlm_outfile" 
+sudo -u root sed "s/.\{$subs_num\}$/$subs_char/" "$wlm_infile" > "$wlm_outfile" 
 echo $STAND""
 f_complete
 #
@@ -780,7 +780,7 @@ read subs_poss
 echo -ne $STAND"Enter how many characters after start position you want to replace (ie.2); "$GREEN
 read subs_pose
 echo $STAND"Working .."
-sed -r "s/^(.{$subs_poss})(.{$subs_pose})/\1$subs_char/" "$wlm_infile" > "$wlm_outfile" 
+sudo -u root sed -r "s/^(.{$subs_poss})(.{$subs_pose})/\1$subs_char/" "$wlm_infile" > "$wlm_outfile" 
 echo $STAND""
 f_complete
 fi
@@ -845,7 +845,7 @@ echo $GREEN">$STAND Removing any leading white spaces and tabs from the file.."
 sed -e 's/^[ \t]*//' working5.txt > working6.txt
 echo $GREEN">$STAND One more pass to sort and remove any duplicates.."
 cat working6.txt | sort | uniq > working7.txt
-mv working7.txt $wlm_outfile
+sudo -u root mv working7.txt $wlm_outfile
 echo $GREEN">$STAND Cleaning up temporary files.."
 rm -rf working*.txt
 fi
@@ -866,7 +866,7 @@ echo $STAND""
 f_inout
 echo "Working .." 
 pw-inspector -i $wlm_infile -o /root/temp_outfile -m 8 -M 63
-cat /root/temp_outfile | sort | uniq > $wlm_outfile
+sudo -u root cat /root/temp_outfile | sort | uniq > $wlm_outfile
 rm -rf /root/temp_outfile
 echo $STAND""
 f_complete
@@ -875,12 +875,12 @@ f_complete
 # --------
 elif [ "$tidy_menu" == "3" ] ; then 
 echo $STAND""
-echo $BLUE"Sort wordlist based on wordsize"$STAND
+echo $BLUE"Sort wordlist based on wordsize/length"$STAND
 echo "(can speed up cracking process with some programmes)"
 echo $STAND""
 f_inout
 echo "Working .." 
-awk '{ print length(), $0 | "sort -n" }' $wlm_infile | sed 's/[^ ]* //' > $wlm_outfile
+sudo -u root awk '{ print length(), $0 | "sort -n" }' $wlm_infile | sed 's/[^ ]* //' > $wlm_outfile
 f_complete
 fi
 }
@@ -1174,7 +1174,7 @@ f_inout
 echo -ne $STAND"Enter how many characters you want to remove from start of word: "$GREEN
 read dels_char
 echo $STAND"Working .."
-sed "s/^.\{$dels_char\}//" $wlm_infile > $wlm_outfile
+sudo -u root sed "s/^.\{$dels_char\}//" $wlm_infile > $wlm_outfile
 echo $STAND""
 f_complete
 #
@@ -1189,7 +1189,7 @@ f_inout
 echo -ne "Enter how many characters you want to remove from end of word: " 
 read pos_char
 echo $STAND"Working .."
-sed "s/.\{$pos_char\}$//" $wlm_infile > $wlm_outfile
+sudo -u root sed "s/.\{$pos_char\}$//" $wlm_infile > $wlm_outfile
 echo $STAND""
 f_complete
 #
@@ -1219,7 +1219,7 @@ rem_count=$(wc -l rem_temp | cut -d " " -f 1)
   fi
 echo $STAND"Working .."
 rm rem_temp
-sed "s/$char_remove//g" $wlm_infile > $wlm_outfile
+sudo -u root sed "s/$char_remove//g" $wlm_infile > $wlm_outfile
 echo $STAND""
 f_complete
 #
@@ -1249,7 +1249,7 @@ if [ "$rem_count" == "0" ] ; then
 fi
 echo "$GREEN$rem_count$STAND words will be removed."
 echo $STAND"Working .." 
-sed "/$char_remove/d" $wlm_infile > $wlm_outfile
+sudo -u root sed "/$char_remove/d" $wlm_infile > $wlm_outfile
 rm rem_temp
 echo $STAND""
 f_complete
@@ -1265,7 +1265,7 @@ f_inout
 echo -ne $STAND"Enter how many identical adjacent characters should be allowed: "$GREEN
 read ident_numb
 echo $STAND"Working .."
-sed "/\([^A-Za-z0-9_]\|[A-Za-z0-9]\)\1\{$ident_numb,\}/d" $wlm_infile > $wlm_outfile
+sudo -u root sed "/\([^A-Za-z0-9_]\|[A-Za-z0-9]\)\1\{$ident_numb,\}/d" $wlm_infile > $wlm_outfile
 echo $STAND""
 f_complete
 #
@@ -1302,7 +1302,7 @@ if [ -f $wlm_outfile ] ; then
 	fi
 fi
 echo "Working .."
-grep -v -x -f $read_in $wlm_infile > $wlm_outfile
+sudo -u root grep -v -x -f $read_in $wlm_infile > $wlm_outfile
 echo $STAND""
 f_complete
 #
@@ -1317,7 +1317,7 @@ f_inout
 echo -ne $STAND"Enter how many numeric values should be allowed: "$GREEN
 read ident_numb
 echo $STAND"Working .."
-nawk 'gsub("[0-9]","&",$0)=='$ident_numb'' $wlm_infile > $wlm_outfile
+sudo -u root nawk 'gsub("[0-9]","&",$0)=='$ident_numb'' $wlm_infile > $wlm_outfile
 echo $STAND""
 f_complete
 #
@@ -1339,14 +1339,14 @@ echo -ne $STAND"How many times may characters be repeated in a word: "$GREEN
 read rep_time
 echo ""
 echo "Working.."
-sed "/\(.\)\(.*\1\)\{$rep_time,\}/d" $wlm_infile > $wlm_outfile
+sudo -u root sed "/\(.\)\(.*\1\)\{$rep_time,\}/d" $wlm_infile > $wlm_outfile
 fi
 if [ "$rep_char" != "" ] ; then 
 echo -ne $STAND"How many times may $GREEN$rep_char$STAND be repeated in a word: "$GREEN
 read rep_time
 echo ""
 echo $STAND"Working.."
-sed "/\($rep_char\)\(.*\1\)\{$rep_time,\}/d" $wlm_infile > $wlm_outfile
+sudo -u root sed "/\($rep_char\)\(.*\1\)\{$rep_time,\}/d" $wlm_infile > $wlm_outfile
 fi
 echo $STAND""
 f_complete
@@ -1363,7 +1363,7 @@ f_inout
 echo -ne $STAND"Enter the length of words you want removed from wordlist: "$GREEN
 read LEN_REM
 echo $STAND"Working.." 
-awk "length != $LEN_REM" $wlm_infile > $wlm_outfile
+sudo -u root awk "length != $LEN_REM" $wlm_infile > $wlm_outfile
 echo ""
 f_complete
 fi
@@ -1637,71 +1637,71 @@ if [ "$format" == "ddmmyy" ] ; then
 	if [ -n "$space" ] && [ "$space" == "/" ] ; then
 	sed 's/^..//' -i date_list1_temp
 	awk -F- '{print $3 $2 $1}' date_list1_temp > dates_sort.txt
-	sed 's/\(.\{2\}\)/&\//;s/\(.\{5\}\)/&\//' dates_sort.txt > "$date_outfile"
+	sudo -u root sed 's/\(.\{2\}\)/&\//;s/\(.\{5\}\)/&\//' dates_sort.txt > "$date_outfile"
 	rm date_list1_temp && rm dates_sort.txt
 	elif [ -n "$space" ] ; then
 	sed 's/^..//' -i date_list1_temp
 	awk -F- '{print $3 $2 $1}' date_list1_temp > dates_sort.txt
- 	sed "s/\(.\{2\}\)/&"$space"/;s/\(.\{5\}\)/&$space/" dates_sort.txt > "$date_outfile"
+ 	sudo -u root sed "s/\(.\{2\}\)/&"$space"/;s/\(.\{5\}\)/&$space/" dates_sort.txt > "$date_outfile"
 	rm date_list1_temp && rm dates_sort.txt
  	elif [ -z "$space" ] ; then
 	sed 's/^..//' -i date_list1_temp
-	awk -F- '{print $3 $2 $1}' date_list1_temp > "$date_outfile"
+	sudo -u root awk -F- '{print $3 $2 $1}' date_list1_temp > "$date_outfile"
 	rm date_list1_temp
 	fi
 # format ddmmyyyy
 elif [ "$format" == "ddmmyyyy" ] ; then
 	if [ -n "$space" ] && [ "$space" == "/" ] ; then
 	awk -F- '{print $3 $2 $1}' date_list1_temp > dates_sort.txt
-	sed 's/\(.\{2\}\)/&\//;s/\(.\{5\}\)/&\//' dates_sort.txt > "$date_outfile"
+	sudo -u root sed 's/\(.\{2\}\)/&\//;s/\(.\{5\}\)/&\//' dates_sort.txt > "$date_outfile"
 	rm date_list1_temp && rm dates_sort.txt
 	elif [ -n "$space" ] ; then
 	awk -F- '{print $3 $2 $1}' date_list1_temp > dates_sort.txt
- 	sed "s/\(.\{2\}\)/&"$space"/;s/\(.\{5\}\)/&$space/" dates_sort.txt > "$date_outfile"
+ 	sudo -u root sed "s/\(.\{2\}\)/&"$space"/;s/\(.\{5\}\)/&$space/" dates_sort.txt > "$date_outfile"
 	rm date_list1_temp && rm dates_sort.txt
  	elif [ -z "$space" ] ; then
-	awk -F- '{print $3 $2 $1}' date_list1_temp > "$date_outfile"
+	sudo -u root awk -F- '{print $3 $2 $1}' date_list1_temp > "$date_outfile"
 	rm date_list1_temp
 	fi
 # format yymmdd
 elif [ "$format" == "yymmdd" ] ; then
 	if [ -n "$space" ] && [ "$space" == "/" ] ; then
 	sed 's/^..//' -i date_list1_temp
-	sed 's/-/\//g' date_list1_temp > "$date_outfile"
+	sudo -u root sed 's/-/\//g' date_list1_temp > "$date_outfile"
 	rm date_list1_temp
 	elif [ -n "$space" ] ; then
 	sed 's/^..//' -i date_list1_temp
-	sed "s/-/$space/g" date_list1_temp > "$date_outfile"
+	sudo -u root sed "s/-/$space/g" date_list1_temp > "$date_outfile"
 	rm date_list1_temp
  	elif [ -z "$space" ] ; then
 	sed 's/^..//' -i date_list1_temp
-	awk -F- '{print $1 $2 $3}' date_list1_temp > "$date_outfile"
+	sudo -u root awk -F- '{print $1 $2 $3}' date_list1_temp > "$date_outfile"
 	rm date_list1_temp
 	fi
 # format yyyymmdd
 elif [ "$format" == "yyyymmdd" ] ; then
 	if [ -n "$space" ] && [ "$space" == "/" ] ; then
-	sed 's/-/\//g' date_list1_temp > "$date_outfile"
+	sudo -u root sed 's/-/\//g' date_list1_temp > "$date_outfile"
 	rm date_list1_temp
 	elif [ -n "$space" ] ; then
-	sed "s/-/$space/g" date_list1_temp > "$date_outfile"
+	sudo -u root sed "s/-/$space/g" date_list1_temp > "$date_outfile"
 	rm date_list1_temp
 	elif [ -z "$space" ] ; then
-	awk -F- '{print $1 $2 $3}' date_list1_temp > "$date_outfile"
+	sudo -u root awk -F- '{print $1 $2 $3}' date_list1_temp > "$date_outfile"
 	rm date_list1_temp
 	fi
 #format mmddyyyy
 elif [ "$format" == "mmddyyyy" ] ; then
 if [ -n "$space" ] && [ "$space" == "/" ] ; then
 	awk -F- '{print $2 $3 $1}' date_list1_temp > dates_sort.txt
-	sed 's/\(.\{2\}\)/&\//;s/\(.\{5\}\)/&\//' dates_sort.txt > "$date_outfile"
+	sudo -u root sed 's/\(.\{2\}\)/&\//;s/\(.\{5\}\)/&\//' dates_sort.txt > "$date_outfile"
 	rm date_list1_temp && rm dates_sort.txt
 	elif [ -n "$space" ] ; then
 	awk -F- '{print $2 $3 $1}' date_list1_temp > dates_sort.txt
- 	sed "s/\(.\{2\}\)/&"$space"/;s/\(.\{5\}\)/&$space/" dates_sort.txt > "$date_outfile"
+ 	sudo -u root sed "s/\(.\{2\}\)/&"$space"/;s/\(.\{5\}\)/&$space/" dates_sort.txt > "$date_outfile"
 	rm date_list1_temp && rm dates_sort.txt
 	elif [ -z "$space" ] ; then
-	awk -F- '{print $2 $3 $1}' date_list1_temp > "$date_outfile"
+	sudo -u root awk -F- '{print $2 $3 $1}' date_list1_temp > "$date_outfile"
 	rm date_list1_temp
 	fi
 #format mmddyy
@@ -1709,16 +1709,16 @@ elif [ "$format" == "mmddyy" ] ; then
 if [ -n "$space" ] && [ "$space" == "/" ] ; then
 	sed 's/^..//' -i date_list1_temp
 	awk -F- '{print $2 $3 $1}' date_list1_temp > dates_sort.txt
-	sed 's/\(.\{2\}\)/&\//;s/\(.\{5\}\)/&\//' dates_sort.txt > "$date_outfile"
+	sudo -u root sed 's/\(.\{2\}\)/&\//;s/\(.\{5\}\)/&\//' dates_sort.txt > "$date_outfile"
 	rm date_list1_temp && rm dates_sort.txt
 	elif [ -n "$space" ] ; then
 	sed 's/^..//' -i date_list1_temp
 	awk -F- '{print $2 $3 $1}' date_list1_temp > dates_sort.txt
- 	sed "s/\(.\{2\}\)/&"$space"/;s/\(.\{5\}\)/&$space/" dates_sort.txt > "$date_outfile"
+ 	sudo -u root sed "s/\(.\{2\}\)/&"$space"/;s/\(.\{5\}\)/&$space/" dates_sort.txt > "$date_outfile"
 	rm date_list1_temp && rm dates_sort.txt
 	elif [ -z "$space" ] ; then
 	sed 's/^..//' -i date_list1_temp
-	awk -F- '{print $2 $3 $1}' date_list1_temp > "$date_outfile"
+	sudo -u root awk -F- '{print $2 $3 $1}' date_list1_temp > "$date_outfile"
 	rm date_list1_temp
 	fi
 fi
@@ -1780,7 +1780,7 @@ if [ -f $ssid_outfile ] ; then
 fi
 echo "Working .." 
 #stripping the SSIDs from nettxt file
-grep SSID $ssid_infile | egrep -v 'BSSID|SSID [0-9]' | cut -c 18- | sed 's/"//g' | sed 's/ *$//g' | sort -fu > $ssid_outfile
+sudo -u root grep SSID $ssid_infile | egrep -v 'BSSID|SSID [0-9]' | cut -c 18- | sed 's/"//g' | sed 's/ *$//g' | sort -fu > $ssid_outfile
 WC=$(cat $ssid_outfile | wc -l)
 echo $STAND""
 echo "$GREEN$ssid_outfile$STAND has been created with $GREEN$WC$STAND entries;"
@@ -1987,7 +1987,7 @@ sub permute {
 	}
 }
 ' > wlm_permute.pl
-perl wlm_permute.pl $wlm_infile > $wlm_outfile
+sudo -u root perl wlm_permute.pl $wlm_infile > $wlm_outfile
 rm wlm_permute.pl
 echo $STAND""
 f_complete
@@ -2282,7 +2282,7 @@ read UPD1
 			echo $STAND""
 			tail -n 30 /usr/bin/wlm | sed -n "/$CURR_VERS/,\$p"
 			echo $STAND""
-			echo "Please restart application$GREEN wlm"$STAND
+			echo "Please restart$GREEN wlm$STAND script"
 			echo $STAND""
 			rm $LOC/wlm.tmp	
 			exit	
@@ -2295,7 +2295,8 @@ read UPD1
 		echo $STAND""
 		tail -n 30 $LOC/wlm | sed -n "/$CURR_VERS/,\$p"
 		echo $STAND""
-		echo "Please restart application$GREEN wlm"$STAND
+		echo $STAND""
+		echo "Please restart$GREEN wlm$STAND script"
 		echo $STAND""
 		exit
 		else
@@ -2581,11 +2582,14 @@ fi
 #   in terminal upon quitting in BBox.
 # - Corrected few typoes
 # - Included build number when calling for version info. 
-#   Build 0804 27-10-2012
+#   Build 0804  27-10-2012
 # - Included more 'sudos' to allow for better funcionality when using in BBox.
+# - Updated update function for BBox
 #
+# 
 # To Do List 
 # ----------
+#  * Better include sudo requirements.
 #  * Verify OS/Distro -  presence of required tools (pw-inspector) ?
 #  * Include reverse option ?
 #  * ? Continue to make it better ? ;)
