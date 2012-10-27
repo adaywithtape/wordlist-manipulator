@@ -1,6 +1,6 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.8 last edit 26-10-2012 15:30
+# Version 0.8 last edit 26-10-2012 16:30
 # Build: 0803
 # Credits to ; 
 # ============
@@ -1809,7 +1809,7 @@ echo "-----------------------------------"
 echo
 f_inout
 #
-echo ""
+echo $STAND""
 echo "Enter alteration set to use to leetify wordlist"
 echo "(For more simultaneous alterations, see Option 5)"
 echo "------------------------------------------------------------------------------
@@ -2005,9 +2005,9 @@ echo $BLUE"__    __ _     __  __
  \_/\_/ |____||_|\/|_|$STAND
 by TAPE"
 echo ""
-echo "WordList Manipulator"$STAND
-echo "File information"
-echo "--------------------"
+echo $STAND"WordList Manipulator"
+echo $BLUE"File information"
+echo $STAND"--------------------"
 echo -ne "Enter /path/to/wordlist: "$GREEN
 read info
 	while [ ! -f $info ] || [ "$info" == "" ] ; do 
@@ -2184,8 +2184,8 @@ also space does not work, so this function has some limitations.
 
 
 6. Substitute/Replace characters 
-	6.1	Include characters from start of word.
-	6.2	Include characters from end of word.
+	6.1	Substitute/Replace characters from start of word.
+	6.2	Substitute/Replace characters from end of word.
 	6.3	Substitute/Replace characters at specified positions in list.
 Some characters will require you to escape them using backslash (\) 
 also space does not work, so this function has some limitations.
@@ -2560,15 +2560,15 @@ fi
 # > Included rudimentary update function. To be improved..
 #
 #0.8 Released 24-10-2012
-# Build 0801
-# > Improved update function by introducing builds for easier future update checks. 
-# Build 0802   25-10-2012
-# > Included mention of this list of changes when updating.
-# Build 0803   26-10-2012
-# > Included an 'echo' when quitting from main menu to prevent colour from being altered in terminal
-#   upon quitting in BBox.
-# > Corrected few typoes
-# > Included build number when calling for version info. 
+#   Build 0801
+# - Improved update function by introducing builds for easier future update checks. 
+#   Build 0802   25-10-2012
+# - Included mention of this list of changes when updating from current version.
+#   Build 0803   26-10-2012
+# - Included an 'echo' when quitting from main menu to prevent colour from being altered
+#   in terminal upon quitting in BBox.
+# - Corrected few typoes
+# - Included build number when calling for version info. 
 #
 # To Do List 
 # ----------
