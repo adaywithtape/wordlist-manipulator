@@ -13,6 +13,8 @@ To allow the script to run make it executable:
 chmod +x /root/wlm
 }}}
 
+----
+
 *BackBox Linux*
 
 Either follow the same as above for BackTrack, or grab the deb package that ZEROF from BackBox kindly put together; 
