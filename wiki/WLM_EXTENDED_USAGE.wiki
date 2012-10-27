@@ -101,9 +101,13 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/permute_wiki.png
 
 Simply enter a filename and the script will go through it and list ; 
  - Filetype
+
  - Number of lines
+
  - Longest line 
+
  - File size
+
  - First and last 3 lines of the file
 
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/file_info_wiki.png
@@ -111,11 +115,14 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/file_info_wiki.png
 
 = Menu Option h Version and listing of all functions =
 
+This will show the version and build number of the wlm version in use.
+
+On hitting Enter it will go on to show you the help information on using wlm and all the options wlm has.
+
+(entering anything else than 'Enter' will take you back to main menu)
 
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/version_wiki.png
 
 ----
 
 = Menu Option u Check for updates = 
-
-
