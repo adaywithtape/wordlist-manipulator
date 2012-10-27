@@ -8,7 +8,7 @@ wlm is a wordlist manipulation tool written to provide an easy menu-based possib
 
 wlm was written for use on BackTrack linux, however provided the required permissions are in place it should work on most Linux systems.
 
-wlm is intended to simplify wordlist manipulation tasks by having the most common wordlist manipulation tasks done through an clear menu.
+wlm is intended to simplify wordlist manipulation tasks by having the most common wordlist manipulation tasks done through a simple menu.
 
  
 = ALL OPTIONS =
