@@ -27,7 +27,7 @@ sudo dpkg -i wlm-0.0.7_all.deb
 = Running the script =
 
 
-* *WLM can be used in 2 ways ;*
+* * WLM can be used in 2 ways ; *
  # List all possible permutations of a (single) word using Gitsnik's permute.pl script.
  # Alter a wordlist following the options as seen in the options menu.
 
@@ -61,5 +61,6 @@ Running the script to get the options menu ;
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/wlm_v0-7.png
 
 
+----
 
-
+- Using the options menu =
