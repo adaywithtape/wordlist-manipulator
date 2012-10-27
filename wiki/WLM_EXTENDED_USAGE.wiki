@@ -91,7 +91,8 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/leet_wiki.png
 
 This script is written by Gitsnik, and I shamelessly included it ;) 
 
-It created all possible permutations of the letters in each word and writes these to a new file. 
+It creates all possible permutations of the letters in each word and writes these to a new file, its a great bit of code.
+ 
 The only drawback is that this can *massively* increase the wordlist size.
 
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/permute_wiki.png
@@ -119,10 +120,28 @@ This will show the version and build number of the wlm version in use.
 
 On hitting Enter it will go on to show you the help information on using wlm and all the options wlm has.
 
-(entering anything else than 'Enter' will take you back to main menu)
 
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/version_wiki.png
+
+_(entering anything else than just 'Enter' will take you back to main menu)_
 
 ----
 
 = Menu Option u Check for updates = 
+
+The update function was initially created for use on BackTrack and still needs some fine-tuning to get it to work as intended on other distros. 
+
+When running the update function it will check for internet connectivity and if found in order, will continue.
+
+The latest version is downloaded from google code and compares version and build number with the version currently in use.
+
+If found that the downloaded version is newer than the version in use, you will be prompted to accept update or not. 
+
+If accepted, then the temp file downloaded will be renamed to 'wlm' and should replace the old wlm file. 
+
+The script will then stop and prompt to restart.
+
+On restarting you should be running the latest and greatest.
+
+
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/update_wiki.png
