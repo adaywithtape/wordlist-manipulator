@@ -81,3 +81,17 @@ _This overwriting will not work in BackBox if you do not run the script as root 
 {{{
 sudo wlm
 }}}
+
+----
+
+For information on usage of remaing tools;
+
+- Option 10
+
+- File information
+
+- Version and Help Information 
+
+- Update function 
+
+http://code.google.com/p/wordlist-manipulator/wiki/WLM_EXTENDED_USAGE
