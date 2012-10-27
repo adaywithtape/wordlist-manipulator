@@ -47,15 +47,15 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/crunch_size_wiki.png
 
 *10.2 Create a wordlist based on dates _(datelist)_*
 
-This script will create date wordlists (numeric) based on start and end dates.
+This script will create a wordlist (numeric) based on a given range of dates.
 
 You are first prompted for a start date in format yyyy-mm-dd
 
 Then you are prompted for an end date in format yyyy-mm-dd
 
-You then need to enter an output file name for the wordlist
+You then need to enter an output file name for the wordlist.
 
-You can then enter the desired output format of the date 
+Then enter the desired output format of the date as per the guidance given.
 
 Finally you can enter whether you want a spacing character in between days/months/years or not.
 
@@ -63,9 +63,25 @@ The script will list all dates in between the dates as specified and will use th
 
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/dates_wiki.png
 
+----
+*10.3 Strip SSIDs from a kismet generated .nettxt file*
 
 ----
 
+*10.4 Basic leetify options for wordlist*
 
+----
 
+*10.5 Leetif/Permute wordlist (Gitsnik's permute.pl script)*
 
+----
+
+= Menu Option f File Information = 
+
+----
+
+= Menu Option h Version and listing of all functions =
+
+----
+
+= Menu Option u Check for updates = 
