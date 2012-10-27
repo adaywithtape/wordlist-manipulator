@@ -69,10 +69,9 @@ There are verifications in place to check for the existance of the wordlist to b
 If you enter an incorrect input filename, you will be warned and prompted to enter correct /path/to/wordlist. 
 
 
+
 There are also some safeguards put in place in the script to ensure that you dont accidentally overwrite existing files;
 
-If you enter an output filename which already exists, you will be warned that it will be overwritten and prompted to accept or not.
+If you enter an output filename which already exists, you will be warned that it will be overwritten and prompted to either overwrite or cancel the operation.
 
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/Screenshot-wlm08.jpg
-
-
