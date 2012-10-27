@@ -76,3 +76,8 @@ There are also some safeguards put in place in the script to ensure that you don
 If you enter an output filename which already exists, you will be warned that it will be overwritten and prompted to either overwrite or cancel the operation.
 
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/Screenshot-wlm08.jpg
+_This overwriting will not work in BackBox if you do not run the script as root !_ ; 
+{{{
+sudo wlm
+}}}
+
