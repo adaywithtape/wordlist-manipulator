@@ -107,3 +107,9 @@ Each main option has a submenu and the full range of options are ;
 
 
 *u. Check for updates to the script.*
+
+----
+
+For information on basic usage;
+
+http://code.google.com/p/wordlist-manipulator/wiki/WLM_USAGE
