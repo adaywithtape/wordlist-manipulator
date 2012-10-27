@@ -52,14 +52,15 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/wlm_v0-7.png
 
 = Using the options menu =
 
-All the options from 1 through to 9 work in the same way ;
+All the options from *1* through to *9* work in the same way ;
 
 After choosing the main option in options menu, you are presented with a sub-menu.
 
-After choosing the required item from the sub-menu, you are prompted to enter an input file and an output file.
+After choosing the desired option from the sub-menu, you are prompted to enter an input file and an output file.
 
-Then depending on the option chosen, some further input may be required after which the wordlist will be processed and the output file will be written.
+Then, depending on the option chosen, some further input may be required after which the wordlist will be processed, the output file will be written and a summary of the first and last 3 lines of the newly created file will be shown.
 
+_example of main options menu #1 Case Options_
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/Screenshot-wlm07.jpg
 
 ----
