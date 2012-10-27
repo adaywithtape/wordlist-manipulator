@@ -1,7 +1,7 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.8 last edit 26-10-2012 16:30
-# Build: 0803
+# Version 0.8 last edit 26-10-2012 22:15
+# Build: 0804
 # Credits to ; 
 # ============
 # Gitsnik, because he's awesome :)
@@ -65,9 +65,9 @@ f_inout
 	done
     echo $STAND"Working .."
     if [ "$first_letter" == "l" ] || [ "$first_letter" == "L" ] ; then
-    sed 's/^./\l&/' $wlm_infile > $wlm_outfile
+    sudo -u root sed 's/^./\l&/' $wlm_infile > $wlm_outfile
     elif [ "$first_letter" == "u" ] || [ "$first_letter" == "U" ] ; then
-    sed 's/^./\u&/' $wlm_infile > $wlm_outfile
+    sudo -u root sed 's/^./\u&/' $wlm_infile > $wlm_outfile
     fi
     echo $STAND""
 f_complete
@@ -2270,11 +2270,24 @@ echo $GREEN">$STAND Checking if latest version in use.."
 NEW_VERS=$(sed -n 3p $LOC/wlm.tmp | cut -c 11-13)
 NEW_BUILD=$(sed -n 4p $LOC/wlm.tmp | cut -c 10-13)
 
-	if [ $CURR_VERS != $NEW_VERS ] || [ $CURR_BUILD -lt $NEW_BUILD ] ; then
-	echo -ne $STAND"Version in use is $GREEN$CURR_VERS$STAND build $GREEN$CURR_BUILD$STAND
+if [ $CURR_VERS != $NEW_VERS ] || [ $CURR_BUILD -lt $NEW_BUILD ] ; then
+echo -ne $STAND"Version in use is $GREEN$CURR_VERS$STAND build $GREEN$CURR_BUILD$STAND
 Latest available is $GREEN$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND, update ? y/n "$GREEN
-	read UPD1
+read UPD1
 		if [[ $UPD1 == "y" || $UPD1 == "Y" ]] ; then 
+			if [ -d /opt/backbox ] ; then 
+			sudo -u root cp $LOC/wlm.tmp /opt/wlm/wlm
+			sudo -u root cp $LOC/wlm.tmp /usr/bin/wlm
+			sudo -u root cp $LOC/wlm.tmp /menu/auditing/miscellaneous/wlm
+			echo $STAND""
+			tail -n 30 /usr/bin/wlm | sed -n "/$CURR_VERS/,\$p"
+			echo $STAND""
+			echo "Please restart application$GREEN wlm"$STAND
+			echo $STAND""
+			rm $LOC/wlm.tmp	
+			exit	
+			fi
+
 		chmod +x $LOC/wlm.tmp
 		mv $LOC/wlm.tmp $LOC/wlm
 		echo $STAND""
@@ -2290,7 +2303,6 @@ Latest available is $GREEN$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND, update ?
 		rm $LOC/wlm.tmp
 		f_menu
 		fi
-
 	elif [ $CURR_VERS == $NEW_VERS ] && [ $CURR_BUILD == $NEW_BUILD ] ; then
 	echo $RED"Current version in use is the latest version available;$GREEN v$NEW_VERS$STAND build $GREEN$NEW_BUILD$STAND"
 	sleep 3
@@ -2569,9 +2581,11 @@ fi
 #   in terminal upon quitting in BBox.
 # - Corrected few typoes
 # - Included build number when calling for version info. 
+#   Build 0804 27-10-2012
+# - Included more 'sudos' to allow for better funcionality when using in BBox.
 #
 # To Do List 
 # ----------
-#  * Verify OS / presence of required tools (pw-inspector) ?
+#  * Verify OS/Distro -  presence of required tools (pw-inspector) ?
 #  * Include reverse option ?
 #  * ? Continue to make it better ? ;)
