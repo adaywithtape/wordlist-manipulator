@@ -19,8 +19,8 @@ chmod +x /root/wlm
 
 Either follow the same as above for BackTrack, or grab the deb package that ZEROF from BackBox kindly put together; 
 {{{
-wget http://wordlist-manipulator.googlecode.com/files/wlm-0.0.7_all.deb
-sudo dpkg -i wlm-0.0.7_all.deb
+wget http://wordlist-manipulator.googlecode.com/files/wlm-0.8_all.deb
+sudo dpkg -i wlm-0.8_all.deb
 }}}
 
 ----
