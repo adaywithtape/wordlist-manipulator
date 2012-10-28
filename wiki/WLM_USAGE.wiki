@@ -95,3 +95,9 @@ For information on usage of remaining items;
 - Update function 
 
 http://code.google.com/p/wordlist-manipulator/wiki/WLM_EXTENDED_USAGE
+
+----
+
+Full options;
+
+http://code.google.com/p/wordlist-manipulator/wiki/WLM_OPTIONS
