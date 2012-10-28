@@ -36,7 +36,7 @@ Otherwise script can be started by simply typing 'wlm' in a terminal.
 
 = Running the script =
 
-*Running the script when not installed using a .deb package.*
+*Running the script when not using a .deb package to install.*
 
 WLM can be used in 2 ways ;
  * List all possible permutations of a (single) word using Gitsnik's permute.pl script.
