@@ -90,7 +90,7 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/Screenshot-wlm08.jpg
 *_Note!_*
 
 If you are using BBox and have started wlm from the menu, then wlm should be running in root and all should work seamlessly.
-If you are using BBox and started wlm thorugh a terminal window, then it is possible that you will be prompted for root password when the script attempts to overwrite of an existing file. 
+If you are using BBox and started wlm thorugh a terminal window, then it is possible that you will be prompted for root password when the script attempts to overwrite an existing file. 
 
 
 ----
