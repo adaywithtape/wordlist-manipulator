@@ -9,7 +9,7 @@
 
  * Menu option u  Check for updates
 
-
+----
 
 = Menu Option 10 =
 
