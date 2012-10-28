@@ -147,3 +147,11 @@ On restarting you should be running the latest and greatest.
 
 
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/update_wiki.png
+
+----
+
+Wiki links; 
+
+http://code.google.com/p/wordlist-manipulator/wiki/WLM_USAGE
+
+http://code.google.com/p/wordlist-manipulator/wiki/WLM_OPTIONS
