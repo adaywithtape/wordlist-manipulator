@@ -108,8 +108,9 @@ For information on usage of remaining items;
 http://code.google.com/p/wordlist-manipulator/wiki/WLM_EXTENDED_USAGE
 
 ----
+Wiki Links
 
-Wiki links ; 
+http://code.google.com/p/wordlist-manipulator/wiki/WLM_USAGE
 
 http://code.google.com/p/wordlist-manipulator/wiki/WLM_OPTIONS
 
