@@ -110,6 +110,10 @@ Each main option has a submenu and the full range of options are ;
 
 ----
 
-For information on basic usage;
+Wiki Links
 
 http://code.google.com/p/wordlist-manipulator/wiki/WLM_USAGE
+
+http://code.google.com/p/wordlist-manipulator/wiki/WLM_OPTIONS
+
+http://code.google.com/p/wordlist-manipulator/wiki/WLM_EXTENDED_USAGE
