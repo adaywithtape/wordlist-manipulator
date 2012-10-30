@@ -67,7 +67,7 @@ After choosing the main option in options menu, you are presented with a sub-men
 
 After choosing the desired option from the sub-menu, you are prompted to enter an input file and an output file.
 
-_Note that there is *NO* auto-complete, so the full path/file needs to be input manually_
+_Note that there is *NO* auto-complete, so the full path/file needs to be input manually, you can alternatively drag and drop files to get the path/file_
 
 Then, depending on the option chosen, some further input may be required after which the wordlist will be processed, the output file will be written and a summary of the first and last 3 lines of the newly created file will be shown.
 
