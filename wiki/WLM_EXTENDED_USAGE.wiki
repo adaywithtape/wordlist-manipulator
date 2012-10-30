@@ -32,8 +32,7 @@ You are prompted to enter ;
 
  - the length of the words in wordlist (for instance 8, the minumum length for WPA)
 
- - the number of passphrases your system can handle per second
-(you can leave this item blank) 
+ - the number of passphrases your system can handle per second. _(you can leave this item blank)_
 
 The script will then calculate the estimated number of lines/words in the wordlist.
 
