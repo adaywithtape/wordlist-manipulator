@@ -39,7 +39,7 @@ Otherwise script can be started by simply typing 'wlm' in a terminal.
 *Running the script when not using a .deb package to install.*
 
 WLM can be used in 2 ways ;
- * List all possible permutations of a (single) word using Gitsnik's permute.pl script.
+ * List all possible character permutations of a (single) word using Gitsnik's permute.pl script.
  * Alter a wordlist following the options as seen in the options menu.
 
 Running wlm on a single word to list all possible permutations of that word (in this example the word 'one') ;
