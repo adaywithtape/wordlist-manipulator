@@ -40,7 +40,7 @@ If you entered how many passphrases/sec your system can handle, then it will als
 
 Finally it will show the estimated size of the wordlist in Bytes through to Petabytes. 
 
-http://i94.photobucket.com/albums/l112/TAPE_RULEZ/file_info_wiki.png
+http://i94.photobucket.com/albums/l112/TAPE_RULEZ/crunch_size_wiki.png
 
 ----
 
