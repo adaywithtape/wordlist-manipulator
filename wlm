@@ -2701,7 +2701,7 @@ fi
 # - Included more 'sudos' to allow for better funcionality when using in BBox.
 # - Updated update function for BBox
 #
-#0.9 Released **-04-2013
+#0.9 Released 31-03-2013
 #   Build 0901
 # - Included rot18 decoding/encoding option under menu item 10; 10.6
 # - Included rot47 decoding/encoding option under menu item 10; 10.7
