@@ -1,7 +1,7 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.9 last edit 28-03-2013 04:00
-# Build: 0901
+# Version 0.9 last edit 12-05-2013 17:00
+# Build: 0902
 # Credits to ; 
 # ============
 # Gitsnik, because he's awesome :)
@@ -1164,6 +1164,7 @@ echo "1 Remove X number of characters from start of word.
 7 Remove words which do NOT have X number of numeric values.
 8 Removing words which have X number of repeated characters.
 9 Remove words of a certain length.
+10Remove characters from and including specified character.
 	
 Q Back to menu
 "
@@ -1173,7 +1174,7 @@ echo -ne $STAND"Enter choice from above menu: "$GREEN
 	if [ "$del_menu" == "q" ] || [ "$del_menu" == "Q" ] ; then 
 	echo $STAND""
 	f_menu
-	elif [[ "$del_menu" != [1-9] ]]; then
+	elif [[ "$del_menu" -gt 10 ]]; then
 	echo $RED"must be an entry from the above menu $STAND" 
 	sleep 1
 	f_delete
@@ -1380,6 +1381,23 @@ echo -ne $STAND"Enter the length of words you want removed from wordlist: "$GREE
 read LEN_REM
 echo $STAND"Working.." 
 sudo awk "length != $LEN_REM" $wlm_infile > $wlm_outfile
+echo ""
+f_complete
+#
+# Option 10
+# Remove all characters after and including a certain character
+# example: password:12345, remove as from : --> password
+# -------------------------------------------------------------
+elif [ "$del_menu" == "10" ] ; then 
+echo $STAND""
+echo $BLUE"Remove all characters after and including a specified character"
+echo $STAND""
+f_inout
+#Enter the length of words you want removed
+echo -ne $STAND"Enter the character from when you want the rest removed: "$GREEN
+read REM_REM
+echo $STAND"Working.." 
+sudo sed "s/\($REM_REM\).*//" $wlm_infile > $wlm_outfile
 echo ""
 f_complete
 fi
@@ -2707,7 +2725,8 @@ fi
 # - Included rot47 decoding/encoding option under menu item 10; 10.7
 # - Updated wordlist optmization (7.1) script for better performance and added dos2unix run.
 # - Included check for running as root at script startup.
-#
+#   Build 0902  12-05-2013
+# - Included option 9.10 to allow deletion of characters as from and including a specified character.
 # 
 # To Do List 
 # ----------
