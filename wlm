@@ -1,7 +1,7 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
-# Version 0.9 last edit 12-05-2013 17:00
-# Build: 0902
+# Version 0.9 last edit 12-05-2013 19:30
+# Build: 0903
 # Credits to ; 
 # ============
 # Gitsnik, because he's awesome :)
@@ -1421,6 +1421,7 @@ echo "1 Check what size a crunch created wordlist would be.
 5 Create all possible (leetify) permutations of a wordlist (Gitsnik's permute.pl).
 6 Decode / Encode text with ROT18
 7 Decode / Encode text with ROT47
+8 Check all possible shift values to decode a Caesar cipher shifted text
 
 Q Back to menu
 "
@@ -1429,7 +1430,7 @@ echo -ne $STAND"Enter choice from above menu: "$GREEN
 	if [ "$misc_menu" == "q" ] || [ "$misc_menu" == "Q" ] ; then 
 	echo $STAND""
 	f_menu
-	elif [[ "$misc_menu" != [1-7] ]]; then
+	elif [[ "$misc_menu" != [1-8] ]]; then
 	echo $RED"must be an entry from the above menu $STAND" 
 	sleep 1
 	f_misc
@@ -2124,6 +2125,47 @@ echo
 		echo $STAND""
 		exit
 	fi
+##
+##Option 8 
+##Check all Caesar shift possbilities on section of text
+######################################################## 
+elif [ "$misc_menu" == "8" ] ; then
+clear
+echo $BLUE"Check all possible shift values to decode Caesar shift text"$STAND
+echo "-----------------------------------------------------------"
+echo
+echo -ne "Enter some text to check Caesar shifts on: "$GREEN
+read CAESAR_INPUT
+echo $STAND""
+for SHIFT in {1..26} ; do SHIFT=$((expr $SHIFT - 26)|sed 's/-//') & printf "[$BLUE%2d$STAND]--> %s" "$SHIFT" && echo $CAESAR_INPUT |
+while IFS= read -r -n1 c
+do
+c=$(printf "%d\n" \'$c)
+
+if (($c>=65 && $c<=90)) || (($c>=97 && $c<=122)) ; then
+	enc=$(expr $c + $SHIFT)
+	if (($c>=65 && $c<=90)) && (($enc>90)) ; then
+	enc=$(expr $c + $SHIFT - 26)
+	elif (($c>=97 && $c<=122)) && (($enc>122)) ; then
+	enc=$(expr $c + $SHIFT - 26)
+	elif (($c<65)) || (($c>90 && $c<97)) || (($c>122)) ; then
+	enc=$c
+	fi
+	else enc=$c
+fi
+printf $GREEN"\x$(printf %x $enc)"$STAND
+done
+echo
+done
+echo
+	echo -ne $STAND"hit Enter to return to menu or q/Q to quit "$GREEN
+	read return
+	if [ "$return" == "" ] ; then 
+		echo $STAND"" 
+	elif [ "$return" == "q" ] || [ "$return" == "Q" ]; then 
+		echo $STAND""
+		exit
+	fi
 fi
 }
 #------------
@@ -2346,7 +2388,7 @@ also space does not work, so this function has some limitations.
 	9.7	Remove words that do not have X number of numeric values.
 	9.8	Remove words that have X number of repeated characters.
 	9.9	Remove words of a certain length.
-
+	9.10	Remove all characters after a specified character. 
 
 10. Miscellaneous fun
 	10.1	Check possible wordlist sizes (with same min-max length only).
@@ -2354,6 +2396,9 @@ also space does not work, so this function has some limitations.
 	10.3	Strip SSIDs from a kismet generated .nettxt file.
 	10.4	Basic leetify options for wordlist.	
 	10.5 	Leetify/Permute wordlist (Gitsnik's permute.pl script).
+	10.6	ROT18 encode/decode text
+	10.7	ROT47 encode/decode text
+	10.8	Check all possible shifts to decode a Caesar cipher shifted text.
 
 
 f. File information
@@ -2727,6 +2772,8 @@ fi
 # - Included check for running as root at script startup.
 #   Build 0902  12-05-2013
 # - Included option 9.10 to allow deletion of characters as from and including a specified character.
+#   Build 0903  12-05-2013
+# - Included option to check all possible shift values on a Caesar cipher text under menu item 10; 10.8
 # 
 # To Do List 
 # ----------
