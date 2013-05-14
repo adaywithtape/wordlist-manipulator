@@ -104,6 +104,7 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/permute_wiki.png
 *10.6 ROT18 Encode/Decode a file*
 
 This will take the text in a file and run ROT18 encoding on it;
+
 Shifting letters up 13 characters and numeric values up 5 characters allowing the same encoding method to be used for 'encryption' and 'decryption'.
 
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/wlm-rot18_zpsbee5f6bf.png
@@ -113,6 +114,7 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/wlm-rot18_zpsbee5f6bf.png
 * 10.7 ROT47 Encode/Decode a file*
 
 This will take the text in a file and run ROT47 encoding on it.
+
 More elaborate than ROT18 encoding, but still allows the same encoding to be used for both 'encryption' and 'decryption'.
 
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/wlm-rot47_zps98698cb4.png
@@ -122,7 +124,6 @@ http://i94.photobucket.com/albums/l112/TAPE_RULEZ/wlm-rot47_zps98698cb4.png
 *10.8 Check all possible shift values to decode a Caesar cipher shifted text*
 
 Will take user input (not file) and prints all 26 possible Caesar cipher letter substitution shifts.
-(shifting text up 1 to 25 values)
 
 http://i94.photobucket.com/albums/l112/TAPE_RULEZ/wlm-caesar_zps01915eaa.png
 
