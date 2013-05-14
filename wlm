@@ -1,7 +1,7 @@
 #!/bin/bash
 # Word List Manipulator (wlm)
 # Version 0.9 last edit 13-05-2013 23:00
-# Build: 0904
+# Build: 0905
 # Credits to ; 
 # ============
 # Gitsnik, because he's awesome :)
@@ -9,7 +9,7 @@
 # Members at unix.com, have always received expert help there.
 # http://cfajohnson.com/shell/ssr/08-The-Dating-Game.shtml for datelist updates.
 # Google ;)
-#=============
+# =============
 # Google code source: http://code.google.com/p/wordlist-manipulator/source/browse/wlm
 #
 #FIXED SETTINGS 
@@ -1842,7 +1842,7 @@ echo $STAND""
 elif [ "$misc_menu" == "4" ] ; then
 clear
 echo $BLUE"Basic leetifying options of wordlist"$STAND
-echo "-----------------------------------"
+echo "------------------------------------"
 echo
 f_inout
 #
@@ -2066,18 +2066,8 @@ echo "Working.."
 sudo cat "$wlm_infile" | tr a-zA-Z0-45-9 n-za-mN-ZA-M5-90-4 > "$wlm_outfile"
 echo ""
 echo $STAND"rot18 decoding/encoding of file $GREEN$wlm_infile$STAND complete" 
-echo $STAND"Output file $GREEN$wlm_outfile$STAND created"
-echo ""
-	echo -ne $STAND"hit Enter to return to menu or q/Q to quit "$GREEN
-	read return
-	if [ "$return" == "" ] ; then 
-		echo $STAND"" 
-	elif [ "$return" == "q" ] || [ "$return" == "Q" ]; then 
-		echo $STAND""
-		exit
-	fi
-
-
+echo 
+f_complete
 ##
 ##
 ## Option 7
@@ -2115,16 +2105,8 @@ fi
 sudo cat "$wlm_infile" | tr '!-~' 'P-~!-O' > "$wlm_outfile"
 echo ""
 echo $STAND"rot47 decoding/encoding of file $GREEN$wlm_infile$STAND complete" 
-echo $STAND"Output file $GREEN$wlm_outfile$STAND created"
 echo
-	echo -ne $STAND"hit Enter to return to menu or q/Q to quit "$GREEN
-	read return
-	if [ "$return" == "" ] ; then 
-		echo $STAND"" 
-	elif [ "$return" == "q" ] || [ "$return" == "Q" ]; then 
-		echo $STAND""
-		exit
-	fi
+f_complete
 ##
 ##Option 8 
 ##Check all Caesar shift possbilities on section of text
@@ -2777,7 +2759,10 @@ fi
 # - Included option to check all possible shift values on a Caesar cipher text under menu item 10; 10.8
 #   Build 0904  13-05-2013
 # - Fixed spacing not being done in Caesar cipher shift check
-# 
+#   Build 0905  14-05-2013 
+# - Fixed ROT18/47 commands not printing out first and last 3 words in created list.
+#
+#
 # To Do List 
 # ----------
 #  * Better include sudo requirements.
